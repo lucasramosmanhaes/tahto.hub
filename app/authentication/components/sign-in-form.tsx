@@ -1,49 +1,59 @@
-'use client'
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
 type formValues = z.infer<typeof formSchema>;
 
+interface SignInProps {
+    formError: (value: boolean) => void;
+}
+
 const formSchema = z.object({
     email: z.email("E-mail inválido"),
     password: z.string("Senha inválida").min(8, "Mínimo 8 caracteres"),
-})
+});
 
-const SignInForm = () => {
-
+const SignInForm = ({ formError }: SignInProps) => {
     const router = useRouter();
-    
+
     const form = useForm<formValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
-            password: ""
+            password: "",
         },
-    })
+    });
+
+    const hasError = Object.keys(form.formState.errors).length > 0;
+
+    useEffect(() => {
+        formError(hasError);
+    }, [hasError, formError]);
 
     const onSubmit = async (values: formValues) => {
         await authClient.signIn.email({
@@ -54,65 +64,75 @@ const SignInForm = () => {
                     router.push("/");
                 },
                 onError: (error) => {
-                    if(error.error.code = authClient.$ERROR_CODES.INVALID_EMAIL_OR_PASSWORD){
+                    if (
+                        (error.error.code =
+                            authClient.$ERROR_CODES.INVALID_EMAIL_OR_PASSWORD)
+                    ) {
                         toast.error("E-mail ou senha inválidos");
                         form.setError("email", {
-                            message: "E-mail ou senha inválidos"
-                        })
-                    }
-                    else{
+                            message: "E-mail ou senha inválidos",
+                        });
+                    } else {
                         toast.error(error.error.message);
                     }
-                }
-            }
+                },
+            },
         });
-    }
+    };
 
     const handleSignInWithGoogle = async () => {
         await authClient.signIn.social({
             provider: "google",
         });
-    }
-    
-    return ( 
+    };
+
+    return (
         <>
             <Card className="w-full">
                 <CardHeader>
                     <CardTitle>Entrar</CardTitle>
-                    <CardDescription>Faça login para continuar.</CardDescription>
+                    <CardDescription>
+                        Faça login para continuar.
+                    </CardDescription>
                 </CardHeader>
 
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-8"
+                    >
                         <CardContent className="grid gap-6">
                             <FormField
                                 control={form.control}
                                 name="email"
                                 render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="Digite seu email" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="Digite seu email"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
                                 )}
                             />
                             <FormField
                                 control={form.control}
                                 name="password"
                                 render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Senha</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder="Digite sua senha"
-                                            type="password"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
+                                    <FormItem>
+                                        <FormLabel>Senha</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="Digite sua senha"
+                                                type="password"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
                                 )}
                             />
                         </CardContent>
@@ -150,8 +170,8 @@ const SignInForm = () => {
                     </form>
                 </Form>
             </Card>
-        </> 
+        </>
     );
-}
- 
+};
+
 export default SignInForm;

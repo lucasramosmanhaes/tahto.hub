@@ -1,62 +1,18 @@
-import { desc } from "drizzle-orm";
-import Image from "next/image";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { AppList } from "@/components/common/app-list";
+import { SectionCards } from "@/components/common/section-cards";
 
-import CategorySelector from "@/components/common/category-selector";
-import Footer from "@/components/common/footer";
-import Header from "@/components/common/header";
-import ProducList from "@/components/common/product-list";
-import { db } from "@/db";
-import { productTable } from "@/db/schema";
-const home = async () => {
-    const products = await db.query.productTable.findMany({
-        with: {
-            variants: true,
-        },
-    });
-
-    const categories = await db.query.categoryTable.findMany({});
-
-    const newlyCreatedProducts = await db.query.productTable.findMany({
-        orderBy: [desc(productTable.createdAt)],
-        with: {
-            variants: true,
-        },
-    });
-
+export default function Home() {
     return (
-        <>
-            <Header />
-
-            <div className="space-y-6">
-                <Image
-                    src={"/banner-01.png"}
-                    alt={""}
-                    width={0}
-                    height={0}
-                    sizes={"100vw"}
-                    className="h-auto w-full px-5"
-                />
-
-                <ProducList title="Mais vendidos" products={products} />
-
-                <CategorySelector categories={categories} />
-
-                <Image
-                    src={"/banner-02.png"}
-                    alt={""}
-                    width={0}
-                    height={0}
-                    sizes={"100vw"}
-                    className="h-auto w-full px-5"
-                />
-
-                <ProducList title="Adicionados recentemente" products={newlyCreatedProducts} />
-
-                <Footer />
-                
+        <div className="flex flex-1 flex-col">
+            <div className="@container/main flex flex-1 flex-col gap-2">
+                <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+                    <AppList />
+                    <SectionCards />
+                    <ChartAreaInteractive />
+                    {/* <DataTable data={data} /> */}
+                </div>
             </div>
-        </>
+        </div>
     );
-};
-
-export default home;
+}
