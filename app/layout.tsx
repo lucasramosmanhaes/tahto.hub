@@ -2,10 +2,10 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
-import { AppSidebar } from "@/components/app-sidebar";
-import { SiteHeader } from "@/components/site-header";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
@@ -83,17 +83,21 @@ const sfMono = localFont({
 
 export const metadata: Metadata = {
     title: "Tahtinho",
-    description: "Loja de vestuário online",
+    description: "Intranet Tahto",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const locale = await getLocale();
+    const messages = await getMessages();
+
     return (
         <html
-            lang="pt-BR"
+            lang={locale}
+            suppressHydrationWarning
             className={cn(
                 "h-full",
                 "antialiased",
@@ -102,25 +106,19 @@ export default function RootLayout({
             )}
         >
             <body className="flex min-h-full flex-col">
-                <TooltipProvider>
-                    <SidebarProvider
-                        style={
-                            {
-                                "--sidebar-width": "calc(var(--spacing) * 72)",
-                                "--header-height": "calc(var(--spacing) * 12)",
-                            } as React.CSSProperties
-                        }
-                    >
-                        <AppSidebar variant="inset" />
-                        <SidebarInset>
-                            <SiteHeader />
-                            <div className="flex flex-1 flex-col">
-                                {children}
-                            </div>
-                        </SidebarInset>
-                    </SidebarProvider>
-                    <Toaster />
-                </TooltipProvider>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <NextIntlClientProvider messages={messages}>
+                        <TooltipProvider>
+                            {children}
+                            <Toaster />
+                        </TooltipProvider>
+                    </NextIntlClientProvider>
+                </ThemeProvider>
             </body>
         </html>
     );

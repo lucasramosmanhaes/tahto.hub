@@ -1,0 +1,49 @@
+{
+    "auth": {
+        "pt": "Portuguese - Brazil",
+        "en": "English - EUA",
+        "es": "Spanish - Mexico",
+        "languageTitle": "Select language",
+        "welcome": "Welcome back",
+        "welcomeSubtitle": "Login to your Tahto account.",
+        "signIn": "Sign In",
+        "signUp": "Create account",
+        "terms": "By clicking continue, you agree to our terms.",
+        "termsLink": "Terms of Service",
+        "and": "and",
+        "privacyLink": "Privacy Policy",
+        "signInDescription": "Log in to continue.",
+        "signInError": "Invalid E-mail or Password",
+        "emailPlaceholder": "Enter your email",
+        "passwordPlaceholder": "Enter your password",
+        "signInButton": "Login"
+    },
+    "header": {
+        "home": "Home"
+    },
+    "navMain": {
+        "home": "Home",
+        "apps": "Applications",
+        "dashboard": "Dashboard",
+        "analitycs": "Analitycs"
+    },
+    "navTools": {
+        "color": "Color",
+        "language": "Language",
+        "searchLanguageDialog": "Do a search..."
+    },
+    "navSecondary": {
+        "help": "Get Help",
+        "settings": "Settings"
+    },
+    "navUser": {
+        "account": "Account",
+        "notifications": "Notifications",
+        "logOut": "Log Out"
+    },
+    "home": {
+        "apps": "Applications",
+        "results": "Results",
+        "analitycs": "Analitycs"
+    }
+}

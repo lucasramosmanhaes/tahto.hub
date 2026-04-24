@@ -7,6 +7,7 @@ import {
     IconUserCircle,
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -33,10 +34,18 @@ interface NavUserProps {
 }
 
 export function NavUser({ user }: NavUserProps) {
+
+    const t = useTranslations("navUser");
+
     const router = useRouter();
-    const signOut = () => {
-        authClient.signOut();
-        router.push("/authentication");
+    const signOut = async () => {
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    router.push("/authentication");
+                },
+            },
+        });
     };
 
     const { isMobile } = useSidebar();
@@ -103,17 +112,17 @@ export function NavUser({ user }: NavUserProps) {
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
                                 <IconUserCircle />
-                                Account
+                                {t("account")}
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <IconNotification />
-                                Notifications
+                                {t("notifications")}
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={signOut}>
                             <IconLogout />
-                            Log out
+                            {t("logOut")}
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

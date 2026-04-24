@@ -1,0 +1,49 @@
+{
+    "auth": {
+        "pt": "Portugués - Brasil",
+        "en": "Inglés - EUA",
+        "es": "Español - México",
+        "languageTitle": "Seleccionar idioma",
+        "welcome": "Bienvenido de nuevo",
+        "welcomeSubtitle": "Inicia sesión en tu cuenta de Tahto.",
+        "signIn": "Iniciar sesión",
+        "signUp": "Crear cuenta",
+        "terms": "Al hacer clic en continuar, aceptas nuestros términos.",
+        "termsLink": "Términos de servicio",
+        "and": "y",
+        "privacyLink": "Política de privacidad",
+        "signInDescription": "Inicia sesión para continuar.",
+        "signInError": "Correo electrónico o contraseña inválidos",
+        "emailPlaceholder": "Ingresa tu correo electrónico",
+        "passwordPlaceholder": "Ingresa tu contraseña",
+        "signInButton": "Acceder"
+    },
+    "header": {
+        "home": "Inicio"
+    },
+    "navMain": {
+        "home": "Inicio",
+        "apps": "Aplicaciones",
+        "dashboard": "Panel",
+        "analitycs": "Analíticas"
+    },
+    "navTools": {
+        "color": "Color",
+        "language": "Idioma",
+        "searchLanguageDialog": "Realiza una búsqueda..."
+    },
+    "navSecondary": {
+        "help": "Obtener ayuda",
+        "settings": "Configuración"
+    },
+    "navUser": {
+        "account": "Cuenta",
+        "notifications": "Notificaciones",
+        "logOut": "Cerrar sesión"
+    },
+    "home": {
+        "apps": "Aplicaciones",
+        "results": "Resultados",
+        "analitycs": "Analíticas"
+    }
+}

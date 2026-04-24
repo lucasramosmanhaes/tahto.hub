@@ -1,6 +1,6 @@
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { AppList } from "@/components/common/app-list";
-import { SectionCards } from "@/components/common/section-cards";
+import { ChartAreaInteractive } from "@/components/home/chart-area-interactive";
+import { AppList } from "@/components/home/app-list";
+import { SectionCards } from "@/components/home/section-cards";
 
 export default function Home() {
     return (

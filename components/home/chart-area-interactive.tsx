@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
@@ -138,6 +139,8 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function ChartAreaInteractive() {
+    const t = useTranslations("home");
+
     const isMobile = useIsMobile();
     const [timeRange, setTimeRange] = React.useState("90d");
 
@@ -162,8 +165,8 @@ export function ChartAreaInteractive() {
     });
 
     return (
-        <div className="px-4 lg:px-6 space-y-3">
-            <h3 className="font-semibold">Métrica</h3>
+        <div className="space-y-3 px-4 lg:px-6">
+            <h3 className="font-semibold">{t("analitycs")}</h3>
             <Card className="@container/card">
                 <CardHeader>
                     <CardTitle>NPS</CardTitle>

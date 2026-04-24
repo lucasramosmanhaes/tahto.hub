@@ -1,4 +1,5 @@
 import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/badge";
 import {
@@ -11,9 +12,11 @@ import {
 } from "@/components/ui/card";
 
 export function SectionCards() {
+    const t = useTranslations("home");
+
     return (
         <div className="space-y-3 px-4 lg:px-6">
-            <h3 className="font-semibold">Resultados</h3>
+            <h3 className="font-semibold">{t("results")}</h3>
             <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
                 <Card className="@container/card">
                     <CardHeader>
