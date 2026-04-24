@@ -125,6 +125,7 @@ const Authentication = () => {
                             <Image
                                 src={gifUrl}
                                 loading="eager"
+                                unoptimized
                                 alt="Image"
                                 width={0}
                                 height={0}

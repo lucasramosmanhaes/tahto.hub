@@ -26,8 +26,6 @@ import {
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
 
-import { NavTools } from "./nav-tools";
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const tMain = useTranslations("navMain");
     const tSecondary = useTranslations("navSecondary");
@@ -84,6 +82,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 <Image
                                     src={"/gif/feliz.gif"}
                                     alt="Tahtinho"
+                                    loading="eager"
+                                    unoptimized
                                     width={70}
                                     height={0}
                                     className="object-contain"
@@ -98,7 +98,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={data.main} />
-                <NavTools />
                 <NavSecondary items={data.secondary} className="mt-auto" />
             </SidebarContent>
             <SidebarFooter>

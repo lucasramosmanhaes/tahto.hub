@@ -19,18 +19,16 @@
         "signInButton": "Acceder"
     },
     "header": {
-        "home": "Inicio"
+        "home": "Inicio",
+        "color": "Color",
+        "language": "Idioma",
+        "searchLanguageDialog": "Realiza una búsqueda..."
     },
     "navMain": {
         "home": "Inicio",
         "apps": "Aplicaciones",
         "dashboard": "Panel",
         "analitycs": "Analíticas"
-    },
-    "navTools": {
-        "color": "Color",
-        "language": "Idioma",
-        "searchLanguageDialog": "Realiza una búsqueda..."
     },
     "navSecondary": {
         "help": "Obtener ayuda",
