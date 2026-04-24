@@ -9,7 +9,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -25,27 +25,21 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "@/components/ui/sidebar";
-import { authClient } from "@/lib/auth-client";
+import { useAuthStore } from "@/store/auth.store";
 
-type SessionData = ReturnType<typeof authClient.useSession>["data"];
 
-interface NavUserProps {
-    user: NonNullable<SessionData>["user"];
-}
-
-export function NavUser({ user }: NavUserProps) {
+export function NavUser() {
 
     const t = useTranslations("navUser");
 
+    const { user, logoutUser } = useAuthStore();
+
     const router = useRouter();
-    const signOut = async () => {
-        await authClient.signOut({
-            fetchOptions: {
-                onSuccess: () => {
-                    router.push("/authentication");
-                },
-            },
-        });
+
+    const signOut = () => {
+        document.cookie = "jwtToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        logoutUser();
+        router.replace("/authentication");
     };
 
     const { isMobile } = useSidebar();
@@ -60,21 +54,21 @@ export function NavUser({ user }: NavUserProps) {
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
                             <Avatar className="h-8 w-8 rounded-lg grayscale">
-                                <AvatarImage
+                                {/* <AvatarImage
                                     src={user.image ?? undefined}
                                     alt={user.name}
-                                />
+                                /> */}
                                 <AvatarFallback className="rounded-lg">
-                                    {user?.name?.split(" ")?.[0]?.[0]}
-                                    {user?.name?.split(" ")?.[1]?.[0]}
+                                    {user?.Claims.uid?.split(" ")?.[0]?.[0]}
+                                    {user?.Claims.uid?.split(" ")?.[1]?.[0]}
                                 </AvatarFallback>
                             </Avatar>
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-medium">
-                                    {user.name}
+                                    {user?.Claims.uid}
                                 </span>
                                 <span className="text-muted-foreground truncate text-xs">
-                                    {user.email}
+                                    {user?.Claims.roles.cargo}
                                 </span>
                             </div>
                             <IconDotsVertical className="ml-auto size-4" />
@@ -89,21 +83,21 @@ export function NavUser({ user }: NavUserProps) {
                         <DropdownMenuLabel className="p-0 font-normal">
                             <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <Avatar className="h-8 w-8 rounded-lg">
-                                    <AvatarImage
+                                    {/* <AvatarImage
                                         src={user.image ?? undefined}
                                         alt={user.name}
-                                    />
+                                    /> */}
                                     <AvatarFallback className="rounded-lg">
-                                        {user?.name?.split(" ")?.[0]?.[0]}
-                                        {user?.name?.split(" ")?.[1]?.[0]}
+                                        {user?.Claims.uid?.split(" ")?.[0]?.[0]}
+                                        {user?.Claims.uid?.split(" ")?.[1]?.[0]}
                                     </AvatarFallback>
                                 </Avatar>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
                                     <span className="truncate font-medium">
-                                        {user.name}
+                                        {user?.Claims.uid}
                                     </span>
                                     <span className="text-muted-foreground truncate text-xs">
-                                        {user.email}
+                                        {user?.Claims.roles.cargo}
                                     </span>
                                 </div>
                             </div>

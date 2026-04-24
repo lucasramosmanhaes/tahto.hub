@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -24,7 +23,6 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
 
 type formValues = z.infer<typeof formSchema>;
 
@@ -60,25 +58,7 @@ const SignUpForm = () => {
         },
     });
 
-    async function onSubmit(values: formValues) {
-        await authClient.signUp.email({
-            name: values.name,
-            email: values.email,
-            password: values.password,
-            fetchOptions: {
-                onSuccess: () => {
-                    router.push("/");
-                },
-                onError: (error) => {
-                    if(error.error.code = authClient.$ERROR_CODES.USER_ALREADY_EXISTS){
-                        toast.error(`Email já cadastrado `)
-                        form.setError("email", { message: "E-mail já cadastrado" })
-                    }
-                    toast.error(error.error.message)
-                },
-            },
-        });
-    }
+
 
     return (
         <>
@@ -92,7 +72,7 @@ const SignUpForm = () => {
 
                 <Form {...form}>
                     <form
-                        onSubmit={form.handleSubmit(onSubmit)}
+                        // onSubmit={form.handleSubmit()}
                         className="space-y-8"
                     >
                         <CardContent className="grid gap-6">

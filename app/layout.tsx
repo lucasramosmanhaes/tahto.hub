@@ -115,7 +115,7 @@ export default async function RootLayout({
                     <NextIntlClientProvider messages={messages}>
                         <TooltipProvider>
                             {children}
-                            <Toaster />
+                            <Toaster position="top-right"/>
                         </TooltipProvider>
                     </NextIntlClientProvider>
                 </ThemeProvider>

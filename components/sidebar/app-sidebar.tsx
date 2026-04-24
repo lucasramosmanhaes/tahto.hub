@@ -14,7 +14,6 @@ import * as React from "react";
 
 import { NavMain } from "@/components/sidebar/nav-main";
 import { NavSecondary } from "@/components/sidebar/nav-secondary";
-import { NavUser } from "@/components/sidebar/nav-user";
 import {
     Sidebar,
     SidebarContent,
@@ -24,7 +23,8 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { authClient } from "@/lib/auth-client";
+
+import { NavUser } from "./nav-user";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const tMain = useTranslations("navMain");
@@ -67,8 +67,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ],
     };
 
-    const session = authClient.useSession();
-
     return (
         <Sidebar collapsible="offcanvas" {...props}>
             <SidebarHeader>
@@ -84,9 +82,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                     alt="Tahtinho"
                                     loading="eager"
                                     unoptimized
-                                    width={70}
+                                    width={0}
                                     height={0}
-                                    className="object-contain"
+                                    className="object-contain w-18 h-18"
                                 />
                                 <span className="text-base font-semibold">
                                     Tahtinho
@@ -101,7 +99,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <NavSecondary items={data.secondary} className="mt-auto" />
             </SidebarContent>
             <SidebarFooter>
-                {session.data?.user && <NavUser user={session.data.user} />}
+                <NavUser />
             </SidebarFooter>
         </Sidebar>
     );

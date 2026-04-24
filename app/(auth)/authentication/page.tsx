@@ -21,10 +21,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { FieldDescription } from "@/components/ui/field";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import SignInForm from "./components/sign-in-form";
-import SignUpForm from "./components/sign-up-form";
 
 const Authentication = () => {
     const { theme, setTheme } = useTheme();
@@ -104,22 +102,7 @@ const Authentication = () => {
                                     {t("welcomeSubtitle")}
                                 </p>
                             </div>
-                            <Tabs defaultValue="sign-in">
-                                <TabsList>
-                                    <TabsTrigger value="sign-in">
-                                        {t("signIn")}
-                                    </TabsTrigger>
-                                    <TabsTrigger value="sign-up">
-                                        {t("signUp")}
-                                    </TabsTrigger>
-                                </TabsList>
-                                <TabsContent value="sign-in" className="w-full">
-                                    <SignInForm formError={setHasError} />
-                                </TabsContent>
-                                <TabsContent value="sign-up" className="w-full">
-                                    <SignUpForm />
-                                </TabsContent>
-                            </Tabs>
+                            <SignInForm formError={setHasError} />
                         </div>
                         <div className="bg-muted relative hidden md:block">
                             <Image

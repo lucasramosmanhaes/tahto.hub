@@ -26,28 +26,26 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
-
-type formValues = z.infer<typeof formSchema>;
+import { useAuthStore } from "@/store/auth.store";
 
 interface SignInProps {
     formError: (value: boolean) => void;
 }
 
-const formSchema = z.object({
-    email: z.email("E-mail inválido"),
-    password: z.string("Senha inválida").min(8, "Mínimo 8 caracteres"),
-});
-
 const SignInForm = ({ formError }: SignInProps) => {
     const router = useRouter();
-
     const t = useTranslations("auth");
+    const setUser = useAuthStore((state) => state.setUser);
 
-    const form = useForm<formValues>({
+    const formSchema = z.object({
+        matricula: z.string().min(8, t("registrationError")).max(8, t("registrationError")),
+        password: z.string().trim().min(1, t("passwordMinError")),
+    });
+
+    const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "",
+            matricula: "",
             password: "",
         },
     });
@@ -58,90 +56,113 @@ const SignInForm = ({ formError }: SignInProps) => {
         formError(hasError);
     }, [hasError, formError]);
 
-    const onSubmit = async (values: formValues) => {
-        await authClient.signIn.email({
-            email: values.email,
-            password: values.password,
-            fetchOptions: {
-                onSuccess: () => {
-                    router.push("/");
+    const apiIdTahto = process.env.NEXT_PUBLIC_API_ID_TAHTO;
+
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+
+        if(!apiIdTahto){
+            console.log("[error] - inicializar variável de ambiente: NEXT_PUBLIC_API_ID_TAHTO")
+            return
+        }
+
+        try {
+            const res = await fetch(apiIdTahto, {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Accept": "application/json" 
                 },
-                onError: (error) => {
-                    if (
-                        (error.error.code =
-                            authClient.$ERROR_CODES.INVALID_EMAIL_OR_PASSWORD)
-                    ) {
-                        toast.error(t("signInError"));
-                        form.setError("email", {
-                            message: t("signInError"),
-                        });
-                    } else {
-                        toast.error(error.error.message);
-                    }
-                },
-            },
-        });
+                // credentials: "include",
+                body: JSON.stringify({
+                    matricula: values.matricula,
+                    senha: values.password,
+                }),
+            });
+    
+            if (!res.ok) {
+                toast.error(t("signInError"));
+                form.setError("matricula", {
+                    message: t("signInError"),
+                });
+                return;
+            }
+    
+            const data = await res.json();
+            setUser(data);
+            
+            // eslint-disable-next-line react-hooks/immutability
+            document.cookie = `jwtToken=${data.Token}; path=/`;
+            
+            router.push("/");
+    
+        } catch (err) {
+            console.error("ERRO:", err);
+            toast.error(t("signInErrorVpn"));
+        }
     };
 
     return (
-        <>
-            <Card className="w-full">
-                <CardHeader>
-                    <CardTitle>{t("signIn")}</CardTitle>
-                    <CardDescription>
-                        {t("signInDescription")}
-                    </CardDescription>
-                </CardHeader>
+        <Card className="w-full">
+            <CardHeader>
+                <CardTitle>{t("signIn")}</CardTitle>
+                <CardDescription>{t("signInDescription")}</CardDescription>
+            </CardHeader>
 
-                <Form {...form}>
-                    <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="space-y-8"
-                    >
-                        <CardContent className="grid gap-6">
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder={t("emailPlaceholder")}
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Senha</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder={t("passwordPlaceholder")}
-                                                type="password"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </CardContent>
-                        <CardFooter className="flex flex-col gap-2">
-                            <Button type="submit" className="w-full">
-                                {t("signInButton")}
-                            </Button>
-                        </CardFooter>
-                    </form>
-                </Form>
-            </Card>
-        </>
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-8"
+                >
+                    <CardContent className="grid gap-6">
+                        <FormField
+                            control={form.control}
+                            name="matricula"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>{t("signInLabel")}</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder={t("registrationPlaceholder")}
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>{t("passwordLabel")}</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder={t("passwordPlaceholder")}
+                                            type="password"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </CardContent>
+
+                    <CardFooter className="flex flex-col gap-2">
+                        <Button
+                            type="submit"
+                            className="w-full"
+                            disabled={form.formState.isSubmitting}
+                        >
+                            {form.formState.isSubmitting
+                                ? "Entrando..."
+                                : t("signInButton")}
+                        </Button>
+                    </CardFooter>
+                </form>
+            </Form>
+        </Card>
     );
 };
 
