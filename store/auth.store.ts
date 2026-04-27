@@ -5,9 +5,11 @@ import { UserModel } from "@/model/user.model";
 
 interface AuthState {
     user: UserModel | null;
-    token: string | null;
+    idTahtoJwtToken: string | null;
     isAuthenticated: boolean;
-    setUser: (data: UserModel) => void;
+    matricula: string | null;
+    password: string | null;
+    setUser: (data: UserModel, matricula: string, password: string) => void;
     logoutUser: () => void;
 }
 
@@ -15,19 +17,25 @@ export const useAuthStore = create<AuthState>()(
     persist(
         (set) => ({
             user: null,
-            token: null,
+            idTahtoJwtToken: null,
             isAuthenticated: false,
-            setUser: (data) =>
+            matricula: null,
+            password: null,
+            setUser: (data, matricula, password) =>
                 set({
                     user: data,
-                    token: data.Token,
+                    idTahtoJwtToken: data.Token,
                     isAuthenticated: data.Autenticado,
+                    matricula: matricula,
+                    password: password,
                 }),
             logoutUser: () =>
                 set({
                     user: null,
-                    token: null,
+                    idTahtoJwtToken: null,
                     isAuthenticated: false,
+                    matricula: null,
+                    password: null,
                 }),
         }),
         { name: "auth" } // salva no localStorage

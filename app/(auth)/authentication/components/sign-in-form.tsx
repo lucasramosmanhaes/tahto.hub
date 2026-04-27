@@ -88,10 +88,10 @@ const SignInForm = ({ formError }: SignInProps) => {
             }
     
             const data = await res.json();
-            setUser(data);
+            setUser(data, values.matricula, values.password);
             
             // eslint-disable-next-line react-hooks/immutability
-            document.cookie = `jwtToken=${data.Token}; path=/`;
+            document.cookie = `idTahtoJwtToken=${data.Token}; path=/`;
             
             router.push("/");
     

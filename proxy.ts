@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 export async function proxy(request: NextRequest) {
-    const sessionCookie = request.cookies.get("jwtToken");
+    const sessionCookie = request.cookies.get("idTahtoJwtToken");
     const isAuthPage = request.nextUrl.pathname.startsWith("/authentication");
 
     if (!sessionCookie && !isAuthPage) {

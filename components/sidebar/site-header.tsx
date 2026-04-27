@@ -5,7 +5,7 @@ import { BR, MX, US } from "country-flag-icons/react/3x2";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
     Command,
@@ -25,9 +25,14 @@ export function SiteHeader() {
     const t = useTranslations("header");
     const tAuth = useTranslations("auth");
     const { theme, setTheme } = useTheme();
-
     const [openLanguageDialog, setOpenLanguageDialog] = useState(false);
     const router = useRouter();
+    
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setMounted(true);
+    }, []);
 
     const changeLocale = (locale: string) => {
         document.cookie = `locale=${locale}; path=/; max-age=31536000`;
@@ -50,7 +55,11 @@ export function SiteHeader() {
                                 setTheme(theme === "dark" ? "light" : "dark")
                             }
                         >
-                            {theme === "dark" ? <IconSun /> : <IconMoon />}
+                            {mounted ? (
+                                theme === "dark" ? <IconSun /> : <IconMoon />
+                            ) : (
+                                <IconMoon className="opacity-0" />
+                            )}
                         </Button>
                         <Button
                             variant={"outline"}
