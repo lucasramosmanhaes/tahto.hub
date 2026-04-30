@@ -31,20 +31,25 @@
     },
     "navMain": {
         "home": "Home",
-        "apps": "Applications",
-        "releases": "Releases",
-        "benefits": "Benefits",
-        "documents": "Documents",
-        "communities": "Communities",
-        "learn": "Learn",
-        "innovation": "Innovation",
-        "processes": "Processes"
+        "solutions": "Solutions",
+        "case": "Case Studies & Results",
+        "IA": "AI Hub",
+        "tools": "Tools",
+        "squad": "Squads & Teams",
+        "library": "Library",
+        "news": "News",
+        "event": "Events",
+        "comunitys": "Communities"
     },
     "navSecondary": {
-        "help": "Get Help",
-        "settings": "Settings"
+        "label": "QUICK ACCESS",
+        "insights": "Tahto Insights",
+        "performance": "Performance Dashboard",
+        "central": "Help Center",
+        "knowledge": "Knowledge Base",
+        "demands": "Demand Management"
     },
-    "navUser": {
+    "headerUser": {
         "account": "Account",
         "notifications": "Notifications",
         "logOut": "Log Out"

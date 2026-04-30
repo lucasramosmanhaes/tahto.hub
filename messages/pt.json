@@ -24,6 +24,7 @@
         "passwordPlaceholder": "Digite sua senha de rede"
     },
     "header": {
+        "input": "O que você precisa resolver hoje?",
         "home": "Início",
         "color": "Cores",
         "language": "Idioma",
@@ -31,20 +32,25 @@
     },
     "navMain": {
         "home": "Início",
-        "apps": "Aplicações",
-        "releases": "Comunicados",
-        "benefits": "Benefícios",
-        "documents": "Documentos",
-        "communities": "Comunidades",
-        "learn": "Aprendizado",
-        "innovation": "Inovação",
-        "processes": "Processos"
+        "solutions":"Soluções",
+        "case":"Cases & Resultados",
+        "IA":"IA Hub",
+        "tools":"Ferramentas",
+        "squad":"Squad & Times",
+        "library":"Biblioteca",
+        "news":"Notícias",
+        "event":"Eventos",
+        "comunitys":"Comunidades"
     },
     "navSecondary": {
-        "help": "Obtenha Ajuda",
-        "settings": "Configurações"
+        "label": "ACESSO RÁPIDO",
+        "insights": "Tahto Insights",
+        "performance": "Painel de Performance",
+        "central": "Central de Atendimento",
+        "knowledge": "Base de Conhecimento",
+        "demands": "Gestão de Demandas"
     },
-    "navUser": {
+    "headerUser": {
         "account": "Conta",
         "notifications": "Notificações",
         "logOut": "Sair"

@@ -31,20 +31,24 @@
     },
     "navMain": {
         "home": "Inicio",
-        "apps": "Aplicaciones",
-        "releases": "Comunicados",
-        "benefits": "Beneficios",
-        "documents": "Documentos",
-        "communities": "Comunidades",
-        "learn": "Aprendizaje",
-        "innovation": "Innovación",
-        "processes": "Procesos"
+        "solutions": "Soluciones",
+        "case": "Casos y Resultados",
+        "IA": "Hub de IA",
+        "tools": "Herramientas",
+        "squad": "Squads y Equipos",
+        "library": "Biblioteca",
+        "news": "Noticias",
+        "event": "Eventos",
+        "comunitys": "Comunidades"
     },
     "navSecondary": {
-        "help": "Obtener ayuda",
-        "settings": "Configuración"
+        "label": "ACESSO RÁPIDO",
+        "performance": "Panel de Rendimiento",
+        "central": "Centro de Atención",
+        "knowledge": "Base de Conocimientos",
+        "demands": "Gestión de Demandas"
     },
-    "navUser": {
+    "headerUser": {
         "account": "Cuenta",
         "notifications": "Notificaciones",
         "logOut": "Cerrar sesión"

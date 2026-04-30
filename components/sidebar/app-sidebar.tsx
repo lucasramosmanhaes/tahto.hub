@@ -1,21 +1,25 @@
 "use client";
 
 import {
-    IconApps,
     IconBrandGoogleHome,
+    IconBrandLine,
     IconBulb,
-    IconFileDescription,
-    IconGift,
-    IconHelp,
-    IconKeyframes,
-    IconSchool,
-    IconSettings,
-    IconSpeakerphone,
+    IconCalendarEvent,
+    IconChartAreaLine,
+    IconDeviceAnalytics,
+    IconEyeSearch,
+    IconLibrary,
+    IconListDetailsFilled,
+    IconNews,
+    IconRobot,
+    IconStackFront,
+    IconTools,
     IconUsers,
+    IconUsersGroup
 } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import { NavMain } from "@/components/sidebar/nav-main";
@@ -23,14 +27,13 @@ import { NavSecondary } from "@/components/sidebar/nav-secondary";
 import {
     Sidebar,
     SidebarContent,
-    SidebarFooter,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem,
+    SidebarMenuItem
 } from "@/components/ui/sidebar";
 
-import { NavUser } from "./nav-user";
+import { Separator } from "../ui/separator";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const tMain = useTranslations("navMain");
@@ -44,56 +47,76 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 icon: IconBrandGoogleHome,
             },
             {
-                title: tMain("apps"),
-                url: "#",
-                icon: IconApps,
-            },
-            {
-                title: tMain("releases"),
-                url: "#",
-                icon: IconSpeakerphone,
-            },
-            {
-                title: tMain("benefits"),
-                url: "#",
-                icon: IconGift,
-            },
-            {
-                title: tMain("documents"),
-                url: "#",
-                icon: IconFileDescription,
-            },
-            {
-                title: tMain("communities"),
-                url: "#",
-                icon: IconUsers,
-            },
-            {
-                title: tMain("learn"),
-                url: "#",
-                icon: IconSchool,
-            },
-            {
-                title: tMain("innovation"),
+                title: tMain("solutions"),
                 url: "#",
                 icon: IconBulb,
             },
             {
-                title: tMain("processes"),
+                title: tMain("case"),
                 url: "#",
-                icon: IconKeyframes,
+                icon: IconChartAreaLine,
+            },
+            {
+                title: tMain("IA"),
+                url: "#",
+                icon: IconRobot,
+            },
+            {
+                title: tMain("tools"),
+                url: "#",
+                icon: IconTools,
+            },
+            {
+                title: tMain("squad"),
+                url: "#",
+                icon: IconUsers,
+            },
+            {
+                title: tMain("library"),
+                url: "#",
+                icon: IconLibrary,
+            },
+            {
+                title: tMain("news"),
+                url: "#",
+                icon: IconNews,
+            },
+            {
+                title: tMain("event"),
+                url: "#",
+                icon: IconCalendarEvent,
+            },
+            {
+                title: tMain("comunitys"),
+                url: "#",
+                icon: IconUsersGroup,
             },
         ],
         secondary: [
             {
-                title: tSecondary("help"),
+                title: tSecondary("insights"),
                 url: "#",
-                icon: IconHelp,
+                icon: IconEyeSearch,
             },
             {
-                title: tSecondary("settings"),
+                title: tSecondary("performance"),
                 url: "#",
-                icon: IconSettings,
+                icon: IconDeviceAnalytics,
+            },
+            {
+                title: tSecondary("central"),
+                url: "#",
+                icon: IconBrandLine,
+            },
+            {
+                title: tSecondary("knowledge"),
+                url: "#",
+                icon: IconStackFront,
+            },
+            {
+                title: tSecondary("demands"),
+                url: "#",
+                icon: IconListDetailsFilled,
             },
         ],
     };
@@ -127,11 +150,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={data.main} />
-                <NavSecondary items={data.secondary} className="mt-auto" />
+                <Separator className="dark:bg-muted bg-muted/20" />
+                <NavSecondary items={data.secondary} />
             </SidebarContent>
-            <SidebarFooter>
-                <NavUser />
-            </SidebarFooter>
         </Sidebar>
     );
 }

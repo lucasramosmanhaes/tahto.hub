@@ -10,6 +10,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { usePathname } from "next/navigation";
 
 export function NavMain({
     items,
@@ -20,15 +21,19 @@ export function NavMain({
         icon: Icon;
     }[];
 }) {
+
+    const thisUrl = usePathname();
+
     return (
         <SidebarGroup>
-            <SidebarGroupContent className="flex flex-col gap-2">
-                <SidebarMenu>
+            <SidebarGroupContent>
+                <SidebarMenu className="gap-2">
                     {items.map((item) => (
                         <SidebarMenuItem key={item.title}>
                             <SidebarMenuButton asChild>
-                                <Link href={item.url}>
-                                    <item.icon />
+                                <Link href={item.url} 
+                                className={`${item.url === thisUrl ? "bg-primary" : ""} h-auto flex gap-3`}>
+                                    <item.icon style={{width: "20px", height: "20px"}} />
                                     <span>{item.title}</span>
                                 </Link>
                             </SidebarMenuButton>
