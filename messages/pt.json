@@ -32,8 +32,13 @@
     "navMain": {
         "home": "Início",
         "apps": "Aplicações",
-        "dashboard": "Dashboard",
-        "analitycs": "Análise"
+        "releases": "Comunicados",
+        "benefits": "Benefícios",
+        "documents": "Documentos",
+        "communities": "Comunidades",
+        "learn": "Aprendizado",
+        "innovation": "Inovação",
+        "processes": "Processos"
     },
     "navSecondary": {
         "help": "Obtenha Ajuda",

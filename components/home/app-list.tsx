@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import * as React from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,12 +19,14 @@ import { useAuthStore } from "@/store/auth.store";
 import { GuildaGameLoginUseCase } from "@/use-cases/login-guilda-game-use-case";
 import { GuildaLoginUseCase } from "@/use-cases/login-guilda-use-case";
 
+import { Spinner } from "../ui/spinner";
+
 export function AppList() {
 
     const t = useTranslations("home");
     const { matricula, password } = useAuthStore();
-
     const jwtTokenGuilda = Cookies.get("jwtToken");
+    const [loader, setLoader] = useState<number>(0);
 
     const appsListData = [
         {
@@ -38,9 +41,24 @@ export function AppList() {
             image: "/appsImage/guilda-game.png",
             name: "Guilda Game"
         },
+        {
+            id: 3,
+            url: `#`,
+            image: "/appsImage/GIP.png",
+            name: "GIP"
+        },
+        {
+            id: 4,
+            url: `#`,
+            image: "/appsImage/GIF.png",
+            name: "GIF"
+        },
     ];
 
     const handleOpenApp = async (app: typeof appsListData[number]) => {
+
+        setLoader(app.id);
+
         try {
             switch (app.id) {
                 case 1:
@@ -64,6 +82,9 @@ export function AppList() {
             toast.error("Erro ao abrir app", {
                 description: error instanceof Error ? error.message : "Erro desconhecido",
             });
+        }
+        finally{
+            setLoader(0);
         }
     };
 
@@ -95,9 +116,12 @@ export function AppList() {
                                                 className="object-contain w-18 h-18"
                                             />
                                         </CardContent>
-                                        <span className="text-center">
-                                            {app.name}
-                                        </span>
+                                        <div className="flex justify-center items-center gap-2">
+                                            <span className="text-center">
+                                                {app.name}
+                                            </span>
+                                            <Spinner width={4} className={loader === app.id ? "visible" : "invisible"} />
+                                        </div>
                                     </Card>
                                 </div>
                             </div>

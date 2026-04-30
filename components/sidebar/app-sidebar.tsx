@@ -3,12 +3,18 @@
 import {
     IconApps,
     IconBrandGoogleHome,
-    IconChartBar,
-    IconChartPie,
+    IconBulb,
+    IconFileDescription,
+    IconGift,
     IconHelp,
+    IconKeyframes,
+    IconSchool,
     IconSettings,
+    IconSpeakerphone,
+    IconUsers,
 } from "@tabler/icons-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 
@@ -43,14 +49,39 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 icon: IconApps,
             },
             {
-                title: tMain("dashboard"),
+                title: tMain("releases"),
                 url: "#",
-                icon: IconChartPie,
+                icon: IconSpeakerphone,
             },
             {
-                title: tMain("analitycs"),
+                title: tMain("benefits"),
                 url: "#",
-                icon: IconChartBar,
+                icon: IconGift,
+            },
+            {
+                title: tMain("documents"),
+                url: "#",
+                icon: IconFileDescription,
+            },
+            {
+                title: tMain("communities"),
+                url: "#",
+                icon: IconUsers,
+            },
+            {
+                title: tMain("learn"),
+                url: "#",
+                icon: IconSchool,
+            },
+            {
+                title: tMain("innovation"),
+                url: "#",
+                icon: IconBulb,
+            },
+            {
+                title: tMain("processes"),
+                url: "#",
+                icon: IconKeyframes,
             },
         ],
         secondary: [
@@ -76,7 +107,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             asChild
                             className="data-[slot=sidebar-menu-button]:p-1.5!"
                         >
-                            <a href="#">
+                            <Link href="/">
                                 <Image
                                     src={"/gif/feliz.gif"}
                                     alt="Tahtinho"
@@ -89,7 +120,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 <span className="text-base font-semibold">
                                     Tahtinho
                                 </span>
-                            </a>
+                            </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>

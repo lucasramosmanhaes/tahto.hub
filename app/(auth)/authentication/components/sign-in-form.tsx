@@ -26,6 +26,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { useAuthStore } from "@/store/auth.store";
 
 interface SignInProps {
@@ -156,7 +157,7 @@ const SignInForm = ({ formError }: SignInProps) => {
                             disabled={form.formState.isSubmitting}
                         >
                             {form.formState.isSubmitting
-                                ? "Entrando..."
+                                ? <Spinner width={4} />
                                 : t("signInButton")}
                         </Button>
                     </CardFooter>
