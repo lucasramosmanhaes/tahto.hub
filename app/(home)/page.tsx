@@ -11,6 +11,8 @@ export default function Home() {
     const tEmphase = useTranslations("home.emphase");
     const tQuickaccess = useTranslations("home.quickaccess");
 
+    
+
     return (
         <div className="flex flex-1 flex-col">
             <div className="@container/main flex flex-1 flex-col gap-2">
