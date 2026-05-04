@@ -24,10 +24,16 @@
         "passwordPlaceholder": "Enter your network password."
     },
     "header": {
+        "input": "What do you need to solve today?",
         "home": "Home",
-        "color": "Color",
+        "color": "Colors",
         "language": "Language",
-        "searchLanguageDialog": "Do a search..."
+        "searchLanguageDialog": "Search language...",
+        "dark": "Dark mode",
+        "white": "Light mode",
+        "publish": "+ Publish",
+        "greeting": "Hi, {name}",
+        "noResults": "No results found."
     },
     "navMain": {
         "home": "Home",
@@ -49,14 +55,73 @@
         "knowledge": "Knowledge Base",
         "demands": "Demand Management"
     },
-    "headerUser": {
+    "user": {
         "account": "Account",
         "notifications": "Notifications",
         "logOut": "Log Out"
     },
     "home": {
-        "apps": "Applications",
-        "results": "Results",
-        "analitycs": "Analitycs"
+        "news": {
+            "title": "Featured News",
+            "viewAll": "View all",
+            "one": "Tahto launches new Generative AI solution for CX"
+        },
+        "solutions": {
+            "title": "Find solutions by project",
+            "reduceCosts": "Reduce Operational Costs",
+            "improveCx": "Improve Customer Experience",
+            "increaseSales": "Increase Sales and Conversion",
+            "engageEmployees": "Engage and Retain Employees",
+            "dataDecisions": "Make Data-Driven Decisions",
+            "automate": "Automate Processes"
+        },
+        "emphase": {
+            "title": "Featured Solutions",
+            "viewAll": "View all",
+            "highlight": "HIGHLIGHT",
+            "new": "NEW",
+            "trending": "TRENDING",
+            "impact": "Impact",
+            "conversa": {
+                "title": "Tahto Conversa IA",
+                "description": "Generative AI for intelligent and humanized service.",
+                "metric1Label": "AHT",
+                "metric2Label": "Satisfaction",
+                "tag": "Service"
+            },
+            "insights": {
+                "title": "Tahto Insights",
+                "description": "Advanced analytics for performance and CX",
+                "metric1Label": "Efficiency",
+                "metric2Label": "Cost",
+                "tag": "Data & Analytics"
+            },
+            "automate": {
+                "title": "Tahto Automate",
+                "description": "Intelligent process automation with AI.",
+                "metric1Label": "Process time",
+                "metric2Label": "Productivity",
+                "tag": "Automation"
+            },
+            "jornada": {
+                "title": "Tahto Jornada",
+                "description": "Orchestration of journeys and experiences.",
+                "metric1Label": "Conversion",
+                "metric2Label": "NPS",
+                "tag": "CX & Journey"
+            }
+        },
+        "quickaccess": {
+            "title": "Quick access",
+            "customize": "Customize",
+            "conversa": "Tahto Conversa AI",
+            "insights": "Tahto Insights",
+            "automate": "Tahto Automate",
+            "jornada": "Tahto Jornada",
+            "qa": "Tahto QA",
+            "voice": "Tahto Voice",
+            "academy": "Tahto Academy",
+            "viewAll": "View all"
+        }
     }
 }

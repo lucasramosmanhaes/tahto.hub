@@ -1,8 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -153,7 +153,7 @@ const SignInForm = ({ formError }: SignInProps) => {
                     <CardFooter className="flex flex-col gap-2">
                         <Button
                             type="submit"
-                            className="w-full"
+                            className="w-full cursor-pointer"
                             disabled={form.formState.isSubmitting}
                         >
                             {form.formState.isSubmitting

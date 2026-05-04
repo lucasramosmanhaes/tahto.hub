@@ -24,10 +24,16 @@
         "passwordPlaceholder": "Introduzca su contraseña de red."
     },
     "header": {
+        "input": "¿Qué necesitas resolver hoy?",
         "home": "Inicio",
-        "color": "Color",
+        "color": "Colores",
         "language": "Idioma",
-        "searchLanguageDialog": "Realiza una búsqueda..."
+        "searchLanguageDialog": "Buscar idioma...",
+        "dark": "Modo oscuro",
+        "white": "Modo claro",
+        "publish": "+ Publicar",
+        "greeting": "Hola, {name}",
+        "noResults": "No se encontraron resultados."
     },
     "navMain": {
         "home": "Inicio",
@@ -43,19 +49,79 @@
     },
     "navSecondary": {
         "label": "ACESSO RÁPIDO",
+        "insights": "Tahto Insights",
         "performance": "Panel de Rendimiento",
         "central": "Centro de Atención",
         "knowledge": "Base de Conocimientos",
         "demands": "Gestión de Demandas"
     },
-    "headerUser": {
+    "user": {
         "account": "Cuenta",
         "notifications": "Notificaciones",
         "logOut": "Cerrar sesión"
     },
     "home": {
-        "apps": "Aplicaciones",
-        "results": "Resultados",
-        "analitycs": "Analíticas"
+        "news": {
+            "title": "Noticias destacadas",
+            "viewAll": "Ver todas",
+            "one": "Tahto lanza nueva solución de IA Generativa para CX"
+        },
+        "solutions": {
+            "title": "Encuentra soluciones por proyecto",
+            "reduceCosts": "Reducir Costos Operativos",
+            "improveCx": "Mejorar la Experiencia del Cliente",
+            "increaseSales": "Aumentar Ventas y Conversión",
+            "engageEmployees": "Involucrar y Retener Colaboradores",
+            "dataDecisions": "Tomar Decisiones Basadas en Datos",
+            "automate": "Automatizar Procesos"
+        },
+        "emphase": {
+            "title": "Soluciones destacadas",
+            "viewAll": "Ver todas",
+            "highlight": "DESTACADO",
+            "new": "NUEVO",
+            "trending": "EN TENDENCIA",
+            "impact": "Impacto",
+            "conversa": {
+                "title": "Tahto Conversa IA",
+                "description": "IA generativa para atención inteligente y humanizada.",
+                "metric1Label": "TMA",
+                "metric2Label": "Satisfacción",
+                "tag": "Atención"
+            },
+            "insights": {
+                "title": "Tahto Insights",
+                "description": "Analytics avanzado para rendimiento y CX",
+                "metric1Label": "Eficiencia",
+                "metric2Label": "Costo",
+                "tag": "Datos y Analytics"
+            },
+            "automate": {
+                "title": "Tahto Automate",
+                "description": "Automatización inteligente de procesos con IA.",
+                "metric1Label": "Tiempo de proceso",
+                "metric2Label": "Productividad",
+                "tag": "Automatización"
+            },
+            "jornada": {
+                "title": "Tahto Jornada",
+                "description": "Orquestación de jornadas y experiencias.",
+                "metric1Label": "Conversión",
+                "metric2Label": "NPS",
+                "tag": "CX y Jornada"
+            }
+        },
+        "quickaccess": {
+            "title": "Acceso rápido",
+            "customize": "Personalizar",
+            "conversa": "Tahto Conversa AI",
+            "insights": "Tahto Insights",
+            "automate": "Tahto Automate",
+            "jornada": "Tahto Jornada",
+            "qa": "Tahto QA",
+            "voice": "Tahto Voice",
+            "academy": "Tahto Academy",
+            "viewAll": "Ver todos"
+        }
     }
 }
