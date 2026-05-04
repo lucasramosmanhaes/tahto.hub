@@ -53,7 +53,10 @@
         "performance": "Performance Dashboard",
         "central": "Help Center",
         "knowledge": "Knowledge Base",
-        "demands": "Demand Management"
+        "demands": "Demand Management",
+        "needhelp": "Need help?",
+        "asktoai": "Ask Tahto AI",
+        "talktoai": "Chat now"
     },
     "user": {
         "account": "Account",

@@ -53,7 +53,10 @@
         "performance": "Painel de Performance",
         "central": "Central de Atendimento",
         "knowledge": "Base de Conhecimento",
-        "demands": "Gestão de Demandas"
+        "demands": "Gestão de Demandas",
+        "needhelp": "Precisa de ajuda?",
+        "asktoai": "Pergunte para o Tahto AI",
+        "talktoai": "Conversar agora"
     },
     "user": {
         "account": "Conta",

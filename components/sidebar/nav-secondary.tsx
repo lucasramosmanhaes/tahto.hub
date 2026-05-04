@@ -53,17 +53,17 @@ export function NavSecondary({
                             {/* Textos */}
                             <div className="flex flex-col flex-1 min-w-0">
                                 <p className="text-white text-[14px] font-semibold leading-tight">
-                                    Precisa de ajuda?
+                                    {t("needhelp")}
                                 </p>
                                 <p className="text-[#9ca3af] text-[12px] leading-snug mt-0.5">
-                                    Pergunte para o Tahto AI
+                                    {t("asktoai")}
                                 </p>
 
                                 <Button
                                     size="sm"
                                     className="mt-2.5 h-7 w-fit px-3.5 bg-[#6366f1] hover:bg-[#5558e3] text-white text-[12px] font-medium rounded-lg shadow-none"
                                 >
-                                    Conversar agora
+                                    {t("talktoai")}
                                 </Button>
                             </div>
                         </div>
