@@ -1,4 +1,5 @@
 import { IconBotId, IconChartArcs, IconChartBarPopular, IconDots, IconMessagesFilled, IconPhone, IconSchool, IconUser } from "@tabler/icons-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { AppList } from "@/components/home/app-list";
@@ -19,7 +20,18 @@ export default function Home() {
                 <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 px-[2%]">
 
                     <div className="w-full flex lg:flex-row flex-col gap-8">
-                        <div className="w-full min-h-55 lg:w-[70%] bg-[url('/appsImage/banner.png')] bg-no-repeat bg-center bg-contain rounded-xl"> </div>
+                        
+                        <div className="w-full lg:w-[70%]">
+                            <Image
+                                src="/appsImage/banner.png"
+                                alt="Banner"
+                                width={1200}
+                                height={500}
+                                className="w-full h-auto rounded-xl"
+                                quality={100}
+                                priority
+                            />
+                        </div>
 
                         <Card className="w-full lg:w-[30%] bg-transparent">
                             <CardHeader className="flex items-center justify-between">
