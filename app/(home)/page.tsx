@@ -13,6 +13,23 @@ export default function Home() {
     const tEmphase = useTranslations("home.emphase");
     const tQuickaccess = useTranslations("home.quickaccess");
 
+    const dataNews = [
+        {
+            id: 1,
+            text: "Tahto recebe reconhecimento no Prêmio Ser Humano com case de Compliance",
+            image: "/news/01.png"
+        },
+        {
+            id: 2,
+            text: "A essência do atendimento que transforma a experiência",
+            image: "/news/02.png"
+        },
+        {
+            id: 3,
+            text: "Por que NPS sozinho não é suficiente para medir experiência",
+            image: "/news/03.png"
+        },
+    ]
 
     return (
         <div className="flex flex-1 flex-col">
@@ -42,14 +59,14 @@ export default function Home() {
                             </CardHeader>
 
                             <CardContent className="flex flex-col gap-5">
-                                {[1, 2, 3].map((i) => (
-                                    <div key={i} className="flex gap-3">
+                                {dataNews.map((i) => (
+                                    <div key={i.id} className="flex gap-3">
                                         <img width={80} height={100} alt="imagem"
-                                            src={"https://media.istockphoto.com/id/2228488761/pt/foto/ai-helps-generate-business-with-intelligent-automation-and-a-bpa-system-while-a-businessman-at.jpg?b=1&s=612x612&w=0&k=20&c=yZCsjyqSMzvGDaDWDbj1C1hvR3psb3wRteIErmfECHY="}
+                                            src={i.image}
                                             className="rounded-lg"
                                         />
                                         <div className="flex flex-col gap-2">
-                                            <h2>{tNews("one")}</h2>
+                                            <h2>{i.text}</h2>
                                             <span className="text-slate-500">{new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })}</span>
                                         </div>
                                     </div>

@@ -2,6 +2,7 @@
 
 import Cookies from "js-cookie";
 import Image from "next/image";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useState,useSyncExternalStore } from "react";
@@ -21,7 +22,6 @@ import { GuildaGameLoginUseCase } from "@/use-cases/login-guilda-game-use-case";
 import { GuildaLoginUseCase } from "@/use-cases/login-guilda-use-case";
 
 import { Spinner } from "../ui/spinner";
-import Link from "next/link";
 
 function useIsMounted() {
     return useSyncExternalStore(
