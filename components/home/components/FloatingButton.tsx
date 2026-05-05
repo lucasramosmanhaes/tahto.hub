@@ -219,7 +219,7 @@ export function FloatingButton() {
                     </DialogHeader>
 
                     {/* Messages */}
-                    <div className="h-72 overflow-y-auto px-4 py-4 flex flex-col gap-3">
+                    <div className="h-72 2xl:h-156 overflow-y-auto px-4 py-4 flex flex-col gap-3">
                         {messages.map((msg, i) => (
                             <div key={i} className={cn('flex gap-2 items-end', msg.role === 'user' && 'flex-row-reverse')}>
                                 {msg.role === 'bot' && (
