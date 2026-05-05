@@ -2,7 +2,7 @@
 
 import { ArrowUp, Paperclip } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -19,49 +19,69 @@ const QA = [
         keys: ['suporte guilda', 'freshservice', 'guilda'],
         label: '📋 Suporte Guilda',
         q: 'Como abrir solicitação Suporte Guilda?',
-        a: 'Desde 28/04, as demandas do Suporte Guilda devem ser feitas pelo **Freshservice**.\n\nAcesse: Solicitar um Serviço → STAFF - PERFORMANCE → Formulário Suporte Guilda.',
+        a: 'Desde o dia 28/04, as demandas relacionadas ao Suporte Guilda devem ser realizadas pela ferramenta Freshservice. \n\nPara abrir uma solicitação, acesse a Página Inicial no Freshservice e siga o caminho: \nSolicitar um Serviço > STAFF - PERFORMANCE > Formulário Suporte Guilda.',
     },
     {
         keys: ['políticas', 'politicas', 'procedimentos'],
         label: '📄 Políticas',
         q: 'Onde ficam as políticas da empresa?',
-        a: 'As políticas estão no **SharePoint**:\nhttps://oicorp.sharepoint.com/sites/0130/Governanca_de_Processo/...\n\nDúvidas: LD-ProcessosControlesAdministrativos@tahto.com.br',
+        a: 'As políticas e procedimentos estão disponíveis no SharePoint pelo link: \nhttps://oicorp.sharepoint.com/sites/0130/Governanca_de_Processo/11%20Polticas%20da%20CIA/Forms/AllItems.aspx \n\nEm caso de dúvida, entre em contato pelo e-mail: \nLD-ProcessosControlesAdministrativos@tahto.com.br.',
     },
     {
         keys: ['dap'],
         label: '🏢 DAP',
         q: 'Como abrir solicitação para o DAP?',
-        a: 'Desde 17/04/2026, pelo **Freshservice**: https://tahto.freshservice.com/support/home\n\nAtende: cadastro de terceiros, documentações, férias, pagamentos em folha, VA e VT.',
+        a: 'Desde 17/04/2026, todas as novas solicitações ao DAP devem ser abertas exclusivamente pelo portal Freshservice: \nhttps://tahto.freshservice.com/support/home \n\nAs solicitações incluem temas como cadastro ou migração de terceiros, documentações jurídicas e medidas disciplinares, processos trabalhistas, férias (exceções e informações), pagamentos ou descontos em folha e pagamento de benefícios como VA e VT.',
     },
     {
         keys: ['ponto', 'cartão ponto'],
         label: '⏱ Ponto',
         q: 'Onde posso ver meu ponto?',
-        a: 'Acesse o **Portal de Autoatendimento**: https://gente.oi.net.br → Ponto → Cartão Ponto.\n\nSupervisores conseguem ver o ponto de toda a equipe.',
+        a: 'Acesse o Portal de Autoatendimento: \nhttps://gente.oi.net.br → Ponto → Cartão Ponto.\n\nSupervisores conseguem ver o ponto de toda a equipe.',
     },
     {
         keys: ['nome social', 'social'],
         label: '🏷 Nome social',
         q: 'Posso usar meu nome social?',
-        a: 'Sim! A empresa reconhece o nome social de colaboradores transgêneros mediante solicitação formal ao RH.\n\n⚠️ Apelidos e nomes artísticos não são aceitos.',
+        a: 'A empresa reconhecerá para fins de identificação (crachá), no e-mail, sistemas internos, cartões de visita etc., o nome social das pessoas empregadas transgêneros que solicitarem formalmente ao RH a sua preferência pela identificação; \n\n⚠️Não será aceita a utilização de apelidos, nomes artísticos, abreviações etc. \n\n⚠️As alterações relativas ao cadastro do colaborador na empresa serão realizadas mediante a apresentação de documento oficial realizada nos principais órgãos públicos.',
     },
     {
         keys: ['poi', 'oportunidade interna', 'carreira'],
         label: '🚀 POI',
         q: 'O que é POI?',
-        a: 'O **Programa de Oportunidade Interna (POI)** permite crescimento vertical e horizontal por processo seletivo ou mérito.\n\nPolítica: POL-GOG-039-REMUNERAÇÃO em tahto.com.br/regulamentações',
+        a: 'A Tahto acredita que a valorização do capital humano está diretamente ligada na criação de oportunidades aos seus colaboradores. Para isso, temos o Programa de Oportunidade Interna (POI), que possibilita ao colaborador, desde que atenda as primícias necessárias a oportunidade de crescimento em sua carreira, e a Tahto pode em conjunto descobrir e desenvolver grandes talentos; \n\nAqui, é possível o crescimento de forma vertical, horizontal, e as promoções acontecem por meio de processo seletivo e também, por mérito; \n\nPara mais informações, consulte a política de regulamentação, POL-GOG-039-REMUNERAÇÃO disponível em: \nhttps://tahto.com.br/regulamentacoes',
     },
     {
         keys: ['wellhub', 'gympass', 'academia'],
         label: '💪 Wellhub',
         q: 'O que é o Wellhub?',
-        a: 'O **Wellhub** dá acesso a +24.000 academias, estúdios, terapias online e apps de saúde mental.\n\nFAQ: https://luhmus.beedoo.io/wiki/452953/wellhub-confira-o-manual-a-politica-e-a-faq',
+        a: 'Wellhub é uma plataforma de bem-estar que oferece acesso a uma rede de academias, estúdios e outros locais de atividade física a partir de um único plano mensal. Atualmente, a rede Wellhub (Gympass) possui mais de 24.000 locais de atividade física no Brasil e em outros países. A assinatura do Wellhub permite aos usuários frequentar diversos locais conforme o seu plano, sem a necessidade de mensalidades individuais para cada local. Além disso, conta com terapias online e aplicativos de saúde mental. \n\nPara adesão, leia a política e FAQ disponibilizadas na Luhmus através do link: Wellhub: \nhttps://luhmus.beedoo.io/wiki/452953/wellhub-confira-o-manual-a-politica-e-a-faq',
     },
 ];
 
 function findAnswer(text: string) {
     const t = text.toLowerCase();
     return QA.find(item => item.keys.some(k => t.includes(k)));
+}
+
+function renderWithLinks(text: string, isUser: boolean) {
+    const parts = text.split(/(https?:\/\/[^\s]+)/g);
+
+    return parts.map((part, i) =>
+        /^https?:\/\//.test(part)
+            ? React.createElement('a', {
+                key: i,
+                href: part,
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                style: {
+                    color: isUser ? '#c4beff' : '#6255f2',
+                    textDecoration: 'underline',
+                    wordBreak: 'break-all',
+                },
+            }, part)
+            : React.createElement('span', { key: i }, part)
+    );
 }
 
 function BotAvatar({ size = 40, gif }: { size?: number; gif: number }) {
@@ -207,14 +227,14 @@ export function FloatingButton() {
                                         <BotAvatar size={50} gif={2} />
                                     </div>
                                 )}
-                                <div className={cn(
-                                    'max-w-[78%] rounded-2xl px-3 py-2 text-sm leading-relaxed whitespace-pre-line',
-                                    msg.role === 'bot' ? 'bg-muted rounded-bl-sm' : 'bg-[#6255f2] text-white rounded-br-sm'
-                                )}>
-                                    {msg.content}
-                                </div>
+                            <div className={cn(
+                                'max-w-[78%] rounded-2xl px-3 py-2 text-sm leading-relaxed whitespace-pre-line',
+                                msg.role === 'bot' ? 'bg-muted rounded-bl-sm' : 'bg-[#6255f2] text-white rounded-br-sm'
+                            )}>
+                                {renderWithLinks(msg.content, msg.role === 'user')}
                             </div>
-                        ))}
+                                </div>
+                            ))}
 
                         {typing && (
                             <div className="flex gap-2 items-end">
