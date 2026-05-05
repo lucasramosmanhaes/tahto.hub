@@ -4,17 +4,14 @@ import { ArrowUp, Paperclip } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
     Dialog, DialogContent, DialogHeader, DialogTitle,
 } from "@/components/ui/dialog";
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 
-// --- tipos e dados ---
 type Message = { role: 'user' | 'bot'; content: string };
 
 const QA = [
@@ -67,7 +64,33 @@ function findAnswer(text: string) {
     return QA.find(item => item.keys.some(k => t.includes(k)));
 }
 
-// --- componente principal ---
+function BotAvatar({ size = 40, gif }: { size?: number; gif: number }) {
+    const [error, setError] = useState(false);
+
+    const cls = `rounded-full bg-[#6255f2] flex items-center justify-center text-white font-medium`;
+
+    if (error) {
+        return (
+            <div
+                className={cls}
+                style={{ width: size, height: size, fontSize: size * 0.3 }}
+            >
+                T
+            </div>
+        );
+    }
+
+    return (
+        <img
+            src={gif === 1 ? "/gif/informativo.gif" : "/gif/maroto.gif"}
+            alt="Assistente Tahto"
+            width={size}
+            height={size}
+            onError={() => setError(true)}
+        />
+    );
+}
+
 export function FloatingButton() {
     const [pos, setPos] = useState({ bottom: 44, left: 56 });
     const [dragging, setDragging] = useState(false);
@@ -82,10 +105,9 @@ export function FloatingButton() {
     const ref = useRef<HTMLDivElement>(null);
     const offset = useRef({ x: 0, y: 0 });
     const wasDragged = useRef(false);
-    const scrollRef = useRef<HTMLDivElement>(null);
+    const messagesEndRef = useRef<HTMLDivElement>(null);
     const t = useTranslations("navSecondary");
 
-    // drag logic
     const onMouseDown = useCallback((e: React.MouseEvent) => {
         if (!ref.current) return;
         wasDragged.current = false;
@@ -112,10 +134,9 @@ export function FloatingButton() {
         return () => clearTimeout(timer);
     }, []);
 
+    // auto-scroll correto: rola até o elemento sentinela no final
     useEffect(() => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-        }
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, typing]);
 
     const sendMessage = (text: string) => {
@@ -144,47 +165,16 @@ export function FloatingButton() {
             transition: 'opacity 0.2s ease',
             opacity: tooltipVisible ? 1 : 0,
         }}>
-            <svg
-                viewBox="0 0 160 52"
-                width="160"
-                height="78"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ display: 'block' }}
-            >
-                <path
-                    d="M10,0 H150 Q160,0 160,10 V38 Q160,48 150,48 H28 L0,68 L8,48 H10 Q0,48 0,38 V10 Q0,0 10,0 Z"
-                    fill="#6255f2"
-                />
-                <text
-                    x="80"
-                    y="17"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontSize="13"
-                    fontWeight="600"
-                    fill="#fff"
-                    fontFamily="system-ui, sans-serif"
-                >
-                    {t("needhelp")}
-                </text>
-                <text
-                    x="80"
-                    y="32"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontSize="11"
-                    fill="#FFF9"
-                    fontFamily="system-ui, sans-serif"
-                >
-                    {t("asktoai")}
-                </text>
+            <svg viewBox="0 0 160 52" width="160" height="78" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+                <path d="M10,0 H150 Q160,0 160,10 V38 Q160,48 150,48 H28 L0,68 L8,48 H10 Q0,48 0,38 V10 Q0,0 10,0 Z" fill="#6255f2" />
+                <text x="80" y="17" textAnchor="middle" dominantBaseline="middle" fontSize="13" fontWeight="600" fill="#fff" fontFamily="system-ui, sans-serif">{t("needhelp")}</text>
+                <text x="80" y="32" textAnchor="middle" dominantBaseline="middle" fontSize="11" fill="#FFF9" fontFamily="system-ui, sans-serif">{t("asktoai")}</text>
             </svg>
         </div>
     );
 
     return (
         <>
-            {/* floating button */}
             <div ref={ref} onMouseDown={onMouseDown} onClick={handleClick}
                 onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}
                 style={{ position: 'fixed', left: pos.left, bottom: pos.bottom, zIndex: 9999, cursor: dragging ? 'grabbing' : 'pointer', userSelect: 'none' }}>
@@ -195,53 +185,54 @@ export function FloatingButton() {
             </div>
 
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className="sm:max-w-sm p-0 overflow-hidden">
+                <DialogContent className="sm:max-w-2xl p-0 overflow-hidden">
+
                     {/* Header */}
-                    <DialogHeader className="px-4 py-3 border-b bg-muted/40 flex flex-row items-center gap-3">
-                        <Avatar className="h-8 w-8">
-                            <AvatarFallback className="bg-[#6255f2] text-white text-xs">T</AvatarFallback>
-                        </Avatar>
+                    <DialogHeader className="px-4 py-3 border-b bg-muted/40 !flex !flex-row !items-center gap-3">
+                        <div className="shrink-0">
+                            <BotAvatar size={56} gif={1}/>
+                        </div>
                         <div>
-                            <DialogTitle className="text-sm font-medium leading-none">Assistente Tahto</DialogTitle>
+                            <DialogTitle className="text-sm font-medium leading-none">Tahto AI</DialogTitle>
                             <p className="text-xs text-muted-foreground mt-0.5">Online agora</p>
                         </div>
                     </DialogHeader>
 
                     {/* Messages */}
-                    <ScrollArea className="h-72">
-                        <div ref={scrollRef} className="flex flex-col gap-3 p-4">
-                            {messages.map((msg, i) => (
-                                <div key={i} className={cn('flex gap-2 items-end', msg.role === 'user' && 'flex-row-reverse')}>
-                                    {msg.role === 'bot' && (
-                                        <Avatar className="h-6 w-6 flex-shrink-0">
-                                            <AvatarFallback className="bg-[#6255f2] text-white text-[10px]">T</AvatarFallback>
-                                        </Avatar>
-                                    )}
-                                    <div className={cn(
-                                        'max-w-[78%] rounded-2xl px-3 py-2 text-sm leading-relaxed',
-                                        msg.role === 'bot'
-                                            ? 'bg-muted rounded-bl-sm'
-                                            : 'bg-[#6255f2] text-white rounded-br-sm'
-                                    )}>
-                                        {msg.content}
+                    <div className="h-72 overflow-y-auto px-4 py-4 flex flex-col gap-3">
+                        {messages.map((msg, i) => (
+                            <div key={i} className={cn('flex gap-2 items-end', msg.role === 'user' && 'flex-row-reverse')}>
+                                {msg.role === 'bot' && (
+                                    <div className="shrink-0">
+                                        <BotAvatar size={50} gif={2} />
                                     </div>
+                                )}
+                                <div className={cn(
+                                    'max-w-[78%] rounded-2xl px-3 py-2 text-sm leading-relaxed whitespace-pre-line',
+                                    msg.role === 'bot' ? 'bg-muted rounded-bl-sm' : 'bg-[#6255f2] text-white rounded-br-sm'
+                                )}>
+                                    {msg.content}
                                 </div>
-                            ))}
-                            {typing && (
-                                <div className="flex gap-2 items-end">
-                                    <Avatar className="h-6 w-6 flex-shrink-0">
-                                        <AvatarFallback className="bg-[#6255f2] text-white text-[10px]">T</AvatarFallback>
-                                    </Avatar>
-                                    <div className="bg-muted rounded-2xl rounded-bl-sm px-3 py-2 flex gap-1 items-center">
-                                        {[0, 200, 400].map(d => (
-                                            <span key={d} className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50 animate-bounce"
-                                                style={{ animationDelay: `${d}ms` }} />
-                                        ))}
-                                    </div>
+                            </div>
+                        ))}
+
+                        {typing && (
+                            <div className="flex gap-2 items-end">
+                                <div className="shrink-0">
+                                    <BotAvatar size={40} gif={2} />
                                 </div>
-                            )}
-                        </div>
-                    </ScrollArea>
+                                <div className="bg-muted rounded-2xl rounded-bl-sm px-3 py-2 flex gap-1 items-center">
+                                    {[0, 200, 400].map(d => (
+                                        <span key={d} className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50 animate-bounce"
+                                            style={{ animationDelay: `${d}ms` }} />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* sentinela para o auto-scroll */}
+                        <div ref={messagesEndRef} />
+                    </div>
 
                     {/* Suggestions */}
                     <div className="flex flex-wrap gap-1.5 px-4 py-2 border-t bg-muted/20">
@@ -256,7 +247,7 @@ export function FloatingButton() {
 
                     {/* Input */}
                     <div className="flex items-center gap-2 px-3 py-3 border-t">
-                        <Button variant="outline" size="sm" className="h-7 px-2 text-xs gap-1.5 flex-shrink-0">
+                        <Button variant="outline" size="sm" className="h-7 px-2 text-xs gap-1.5 shrink-0">
                             <Paperclip className="w-3.5 h-3.5" />
                             Anexar
                         </Button>
@@ -268,11 +259,12 @@ export function FloatingButton() {
                             className="min-h-[36px] max-h-20 text-sm resize-none flex-1"
                             rows={1}
                         />
-                        <Button size="icon" className="rounded-full w-8 h-8 flex-shrink-0 bg-[#6255f2] hover:bg-[#4e43d4]"
+                        <Button size="icon" className="rounded-full w-8 h-8 shrink-0 bg-[#6255f2] hover:bg-[#4e43d4]"
                             onClick={() => sendMessage(input)}>
                             <ArrowUp className="w-4 h-4" />
                         </Button>
                     </div>
+
                 </DialogContent>
             </Dialog>
         </>
