@@ -47,9 +47,9 @@ export function AppList() {
         },
         {
             id: 2,
-            url: `${process.env.NEXT_PUBLIC_GUILDA_GAME_URL}${jwtTokenGuilda}`,
-            image: "/appsImage/guilda-game.png",
-            name: "Guilda Game"
+            url: `#`,
+            image: "/appsImage/cac.png",
+            name: "CAC"
         },
         {
             id: 3,
@@ -131,11 +131,13 @@ export function AppList() {
                                         className="object-contain w-14 h-14"
                                     />
                                 </CardContent>
-                                <div className="flex justify-center items-center gap-2 pb-3 px-1" style={{ width: "100%" }}>
-                                    <span className="text-center text-sm leading-tight">
+                                <div className="relative flex justify-center items-center pb-3 px-1">
+                                    <span className="text-center text-xl font-black leading-tight">
                                         {app.name}
                                     </span>
-                                    <Spinner width={4} className={loader === app.id ? "visible" : "invisible"} />
+                                    <div className="absolute right-1">
+                                        <Spinner width={4} className={loader === app.id ? "visible" : "invisible"} />
+                                    </div>
                                 </div>
                             </Card>
                         </CarouselItem>
