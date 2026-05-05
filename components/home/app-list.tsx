@@ -132,7 +132,7 @@ export function AppList() {
                                     />
                                 </CardContent>
                                 <div className="relative flex justify-center items-center pb-3 px-1">
-                                    <span className="text-center text-xl font-black leading-tight">
+                                    <span className="text-center text-xl font-medium leading-tight">
                                         {app.name}
                                     </span>
                                     <div className="absolute right-1">
