@@ -235,10 +235,10 @@ export function FloatingButton() {
                     </div>
 
                     {/* Suggestions */}
-                    <div className="flex flex-wrap gap-1.5 px-4 py-2 border-t bg-muted/20">
+                    <div className="flex flex-wrap gap-1.5 px-4 pt-4 border-t bg-muted/20">
                         {QA.map(item => (
                             <Badge key={item.label} variant="outline"
-                                className="cursor-pointer hover:bg-muted text-xs font-normal"
+                                className="cursor-pointer hover:bg-muted text-xs font-normal px-3 py-4"
                                 onClick={() => sendMessage(item.q)}>
                                 {item.label}
                             </Badge>
@@ -247,7 +247,11 @@ export function FloatingButton() {
 
                     {/* Input */}
                     <div className="flex items-center gap-2 px-3 py-3 border-t">
-                        <Button variant="outline" size="sm" className="h-7 px-2 text-xs gap-1.5 shrink-0">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="h-9 px-3 text-xs gap-1.5 shrink-0"
+                        >
                             <Paperclip className="w-3.5 h-3.5" />
                             Anexar
                         </Button>
@@ -259,8 +263,11 @@ export function FloatingButton() {
                             className="min-h-[36px] max-h-20 text-sm resize-none flex-1"
                             rows={1}
                         />
-                        <Button size="icon" className="rounded-full w-8 h-8 shrink-0 bg-[#6255f2] hover:bg-[#4e43d4]"
-                            onClick={() => sendMessage(input)}>
+                        <Button
+                            size="icon"
+                            className="h-9 w-9 shrink-0 rounded-full bg-[#6255f2] hover:bg-[#4e43d4]"
+                            onClick={() => sendMessage(input)}
+                        >
                             <ArrowUp className="w-4 h-4" />
                         </Button>
                     </div>
