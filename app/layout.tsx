@@ -5,7 +5,6 @@ import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
-import { FloatingButton } from "@/components/home/components/FloatingButton";
 import { SuppressThemeWarning } from "@/components/theme/suppress-theme-warning";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
@@ -120,7 +119,6 @@ export default async function RootLayout({
                             <SuppressThemeWarning />
                             {children}
                             <Toaster position="top-right"/>
-                            <FloatingButton />
                         </TooltipProvider>
                     </NextIntlClientProvider>
                 </ThemeProvider>

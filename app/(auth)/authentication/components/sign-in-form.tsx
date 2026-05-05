@@ -1,11 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -39,7 +38,7 @@ const SignInForm = ({ formError }: SignInProps) => {
     const setUser = useAuthStore((state) => state.setUser);
 
     const formSchema = z.object({
-        matricula: z.string().min(8, t("registrationError")).max(8, t("registrationError")),
+        matricula: z.string(),
         password: z.string().trim().min(1, t("passwordMinError")),
     });
 
@@ -59,47 +58,53 @@ const SignInForm = ({ formError }: SignInProps) => {
 
     const apiIdTahto = process.env.NEXT_PUBLIC_API_ID_TAHTO;
 
+    // const onSubmit = async (values: z.infer<typeof formSchema>) => {
+
+    //     if(!apiIdTahto){
+    //         console.log("[error] - inicializar variável de ambiente: NEXT_PUBLIC_API_ID_TAHTO")
+    //         return
+    //     }
+
+    //     try {
+    //         const res = await fetch(apiIdTahto, {
+    //             method: "POST",
+    //             headers: { 
+    //                 "Content-Type": "application/json",
+    //                 "Accept": "application/json" 
+    //             },
+    //             // credentials: "include",
+    //             body: JSON.stringify({
+    //                 matricula: values.matricula,
+    //                 senha: values.password,
+    //             }),
+    //         });
+    
+    //         if (!res.ok) {
+    //             toast.error(t("signInError"));
+    //             form.setError("matricula", {
+    //                 message: t("signInError"),
+    //             });
+    //             return;
+    //         }
+    
+    //         const data = await res.json();
+    //         setUser(data, values.matricula, values.password);
+            
+    //         // eslint-disable-next-line react-hooks/immutability
+    //         document.cookie = `idTahtoJwtToken=${data.Token}; path=/`;
+            
+    //         router.push("/");
+    
+    //     } catch (err) {
+    //         console.error("ERRO:", err);
+    //         toast.error(t("signInErrorVpn"));
+    //     }
+    // };
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-
-        if(!apiIdTahto){
-            console.log("[error] - inicializar variável de ambiente: NEXT_PUBLIC_API_ID_TAHTO")
-            return
-        }
-
-        try {
-            const res = await fetch(apiIdTahto, {
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Accept": "application/json" 
-                },
-                // credentials: "include",
-                body: JSON.stringify({
-                    matricula: values.matricula,
-                    senha: values.password,
-                }),
-            });
+        
+        router.push("/");
     
-            if (!res.ok) {
-                toast.error(t("signInError"));
-                form.setError("matricula", {
-                    message: t("signInError"),
-                });
-                return;
-            }
-    
-            const data = await res.json();
-            setUser(data, values.matricula, values.password);
-            
-            // eslint-disable-next-line react-hooks/immutability
-            document.cookie = `idTahtoJwtToken=${data.Token}; path=/`;
-            
-            router.push("/");
-    
-        } catch (err) {
-            console.error("ERRO:", err);
-            toast.error(t("signInErrorVpn"));
-        }
     };
 
     return (
