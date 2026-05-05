@@ -1,6 +1,9 @@
 "use client";
 
 import { type Icon } from "@tabler/icons-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import {
@@ -11,10 +14,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem
 } from "@/components/ui/sidebar";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Button } from "../ui/button";
+
 
 export function NavSecondary({
     items,
@@ -46,11 +46,9 @@ export function NavSecondary({
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     ))}
-                    <SidebarMenuItem className="mt-5">
+                    {/* <SidebarMenuItem className="mt-5">
                         <div className="flex items-center gap-3 p-3 mx-2 rounded-xl bg-indigo-500/30">
                             <img width={80} height={80} src={"/gif/informativo2.gif"} />
-
-                            {/* Textos */}
                             <div className="flex flex-col flex-1 min-w-0">
                                 <p className="text-white text-[14px] font-semibold leading-tight">
                                     {t("needhelp")}
@@ -67,7 +65,10 @@ export function NavSecondary({
                                 </Button>
                             </div>
                         </div>
-                    </SidebarMenuItem>
+                    </SidebarMenuItem> */}
+
+                    
+
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>

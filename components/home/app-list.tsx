@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import * as React from "react";
-import { useState } from "react";
+import { useState,useSyncExternalStore } from "react";
 import { toast } from "sonner";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,11 +15,20 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore } from "@/store/auth.store";
 import { GuildaGameLoginUseCase } from "@/use-cases/login-guilda-game-use-case";
 import { GuildaLoginUseCase } from "@/use-cases/login-guilda-use-case";
 
 import { Spinner } from "../ui/spinner";
+
+function useIsMounted() {
+    return useSyncExternalStore(
+        () => () => {},
+        () => true,
+        () => false,
+    );
+}
 
 export function AppList() {
 
@@ -27,6 +36,7 @@ export function AppList() {
     const { matricula, password } = useAuthStore();
     const jwtTokenGuilda = Cookies.get("jwtToken");
     const [loader, setLoader] = useState<number>(0);
+    const mounted = useIsMounted();
 
     const appsListData = [
         {
@@ -56,79 +66,81 @@ export function AppList() {
     ];
 
     const handleOpenApp = async (app: typeof appsListData[number]) => {
-
         setLoader(app.id);
-
         try {
             switch (app.id) {
                 case 1:
                     const guildaLogin = new GuildaLoginUseCase();
                     await guildaLogin.handle(matricula!, password!);
                     break;
-    
                 case 2:
                     const guildaGameLogin = new GuildaGameLoginUseCase();
                     await guildaGameLogin.handle(matricula!, password!);
                     break;
-    
                 default:
                     break;
             }
-    
             window.open(app.url, "_blank");
-    
-        }
-        catch (error) {
+        } catch (error) {
             toast.error("Erro ao abrir app", {
                 description: error instanceof Error ? error.message : "Erro desconhecido",
             });
-        }
-        finally{
+        } finally {
             setLoader(0);
         }
     };
 
-    return (
-        <div className="relative w-full space-y-3 px-4 lg:px-6">
-            <h3 className="font-semibold">{t("apps")}</h3>
+    if (!mounted) {
+        return (
+            <div className="w-full">
+                <div className="flex gap-2 mx-2">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                        <div key={i} className="basis-[22%] md:basis-[26%]">
+                            <Skeleton className="w-full h-24 md:h-40 rounded-xl" />
+                            <Skeleton className="w-16 h-4 mx-auto mt-3 rounded" />
+                        </div>
+                    ))}
+                </div>
+                <div className="mt-3 flex justify-center gap-2">
+                    <Skeleton className="w-8 h-8 rounded-full" />
+                    <Skeleton className="w-8 h-8 rounded-full" />
+                </div>
+            </div>
+        );
+    }
 
-            <Carousel opts={{ align: "start" }} className="w-full">
-                <CarouselContent>
+    return (
+        <div className="w-full">
+            <Carousel opts={{ align: "start", dragFree: true }} className="w-full">
+                <CarouselContent className="mx-2">
                     {appsListData.map((app, index) => (
                         <CarouselItem
                             key={index}
-                            className="basis-1/2 md:basis-1/3 lg:basis-1/6"
+                            className="cursor-pointer pl-2 basis-[22%] md:basis-[26%]"
+                            // onClick={() => handleOpenApp(app)}
                         >
-                            <div className="p-1">
-                                <div
-                                    onClick={() => handleOpenApp(app)}
-                                    className="cursor-pointer"
-                                >
-                                    <Card>
-                                        <CardContent className="flex aspect-square items-center justify-center p-6">
-                                            <Image
-                                                src={app.image}
-                                                alt={app.name}
-                                                loading="eager"
-                                                unoptimized
-                                                width={0}
-                                                height={0}
-                                                className="object-contain w-18 h-18"
-                                            />
-                                        </CardContent>
-                                        <div className="flex justify-center items-center gap-2">
-                                            <span className="text-center">
-                                                {app.name}
-                                            </span>
-                                            <Spinner width={4} className={loader === app.id ? "visible" : "invisible"} />
-                                        </div>
-                                    </Card>
+                            <Card className="w-full h-full ring-0">
+                                <CardContent className="flex items-center justify-center p-4 h-24 md:h-40">
+                                    <Image
+                                        src={app.image}
+                                        alt={app.name}
+                                        loading="eager"
+                                        unoptimized
+                                        width={0}
+                                        height={0}
+                                        className="object-contain w-14 h-14"
+                                    />
+                                </CardContent>
+                                <div className="flex justify-center items-center gap-2 pb-3 px-1" style={{ width: "100%" }}>
+                                    <span className="text-center text-sm leading-tight">
+                                        {app.name}
+                                    </span>
+                                    <Spinner width={4} className={loader === app.id ? "visible" : "invisible"} />
                                 </div>
-                            </div>
+                            </Card>
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-
                 <div className="mt-3 flex justify-center gap-2">
                     <CarouselPrevious className="static translate-y-0" />
                     <CarouselNext className="static translate-y-0" />

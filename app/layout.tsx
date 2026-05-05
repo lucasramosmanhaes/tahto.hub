@@ -5,6 +5,8 @@ import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
+import { FloatingButton } from "@/components/home/components/FloatingButton";
+import { SuppressThemeWarning } from "@/components/theme/suppress-theme-warning";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -82,7 +84,7 @@ const sfMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Tahtinho",
+    title: "Tahto Hub",
     description: "Intranet Tahto",
 };
 
@@ -111,11 +113,14 @@ export default async function RootLayout({
                     defaultTheme="system"
                     enableSystem
                     disableTransitionOnChange
+                    scriptProps={{ "data-cfasync": "false" }}
                 >
                     <NextIntlClientProvider messages={messages}>
                         <TooltipProvider>
+                            <SuppressThemeWarning />
                             {children}
                             <Toaster position="top-right"/>
+                            <FloatingButton />
                         </TooltipProvider>
                     </NextIntlClientProvider>
                 </ThemeProvider>

@@ -17,9 +17,9 @@ import {
     IconUsers,
     IconUsersGroup
 } from "@tabler/icons-react";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import { NavMain } from "@/components/sidebar/nav-main";
@@ -133,7 +133,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             <Link href="/">
                                 <Image
                                     src={"/gif/feliz.gif"}
-                                    alt="Tahtinho"
+                                    alt="Tahto Hub"
                                     loading="eager"
                                     unoptimized
                                     width={0}
@@ -141,7 +141,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                     className="object-contain w-18 h-18"
                                 />
                                 <span className="text-base font-semibold">
-                                    Tahtinho
+                                    Tahto Hub
                                 </span>
                             </Link>
                         </SidebarMenuButton>
