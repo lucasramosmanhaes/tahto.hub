@@ -118,7 +118,7 @@ export function FloatingButton() {
     const [autoShow, setAutoShow] = useState(true);
     const [open, setOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { role: 'bot', content: 'Olá! Sou o assistente da Tahto. Selecione uma dúvida ou escreva sua pergunta.' }
+        { role: 'bot', content: 'Olá! Sou o Tahtinho, assistente de Inteligência artificial da Tahto. Selecione uma dúvida ou escreva sua pergunta.' }
     ]);
     const [input, setInput] = useState('');
     const [typing, setTyping] = useState(false);
@@ -213,7 +213,7 @@ export function FloatingButton() {
                             <BotAvatar size={56} gif={1}/>
                         </div>
                         <div>
-                            <DialogTitle className="text-sm font-medium leading-none">Tahto AI</DialogTitle>
+                            <DialogTitle className="text-sm font-medium leading-none">Tahtinho IA</DialogTitle>
                             <p className="text-xs text-muted-foreground mt-0.5">Online agora</p>
                         </div>
                     </DialogHeader>

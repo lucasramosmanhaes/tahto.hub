@@ -21,6 +21,7 @@ import { GuildaGameLoginUseCase } from "@/use-cases/login-guilda-game-use-case";
 import { GuildaLoginUseCase } from "@/use-cases/login-guilda-use-case";
 
 import { Spinner } from "../ui/spinner";
+import Link from "next/link";
 
 function useIsMounted() {
     return useSyncExternalStore(
@@ -41,27 +42,39 @@ export function AppList() {
     const appsListData = [
         {
             id: 1,
-            url: `${process.env.NEXT_PUBLIC_GUILDA_FRONT_URL}`,
+            url: `https://guilda.tahto.net.br/login`,
             image: "/appsImage/guilda.png",
             name: "Guilda"
         },
         {
             id: 2,
-            url: `#`,
+            url: `https://intranet.tahto.net.br/genteemacao/`,
             image: "/appsImage/cac.png",
             name: "CAC"
         },
         {
             id: 3,
-            url: `#`,
+            url: `https://gip.tahto.net.br/gip/index.xhtml`,
             image: "/appsImage/GIP.png",
             name: "GIP"
         },
         {
             id: 4,
-            url: `#`,
+            url: `https://gif.tahto.net.br/gif/`,
             image: "/appsImage/GIF.png",
             name: "GIF"
+        },
+        {
+            id: 5,
+            url: `https://luhmus.beedoo.io/login`,
+            image: "/appsImage/luhmus.png",
+            name: "Luhmus"
+        },
+        {
+            id: 6,
+            url: `https://vehtor.tahto.net.br/bpo`,
+            image: "/appsImage/vehtor.png",
+            name: "Vehtor"
         },
     ];
 
@@ -119,27 +132,30 @@ export function AppList() {
                             className="cursor-pointer pl-2 basis-[22%] md:basis-[26%]"
                             // onClick={() => handleOpenApp(app)}
                         >
-                            <Card className="w-full h-full ring-0">
-                                <CardContent className="flex items-center justify-center p-4 h-24 md:h-40">
-                                    <Image
-                                        src={app.image}
-                                        alt={app.name}
-                                        loading="eager"
-                                        unoptimized
-                                        width={0}
-                                        height={0}
-                                        className="object-contain w-14 h-14"
-                                    />
-                                </CardContent>
-                                <div className="relative flex justify-center items-center pb-3 px-1">
-                                    <span className="text-center text-xl font-medium leading-tight">
-                                        {app.name}
-                                    </span>
-                                    <div className="absolute right-1">
-                                        <Spinner width={4} className={loader === app.id ? "visible" : "invisible"} />
+                            <Link href={app.url} target="_blank">
+                                <Card className="w-full h-full ring-0">
+                                
+                                    <CardContent className="flex items-center justify-center p-4 h-24 md:h-40">
+                                        <Image
+                                            src={app.image}
+                                            alt={app.name}
+                                            loading="eager"
+                                            unoptimized
+                                            width={0}
+                                            height={0}
+                                            className="object-contain w-14 h-14"
+                                        />
+                                    </CardContent>
+                                    <div className="relative flex justify-center items-center pb-3 px-1">
+                                        <span className="text-center text-xl font-medium leading-tight">
+                                            {app.name}
+                                        </span>
+                                        <div className="absolute right-1">
+                                            <Spinner width={4} className={loader === app.id ? "visible" : "invisible"} />
+                                        </div>
                                     </div>
-                                </div>
-                            </Card>
+                                </Card>
+                            </Link>
                         </CarouselItem>
                     ))}
                 </CarouselContent>
