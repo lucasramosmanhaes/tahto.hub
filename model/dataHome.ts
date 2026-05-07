@@ -6,7 +6,7 @@ export const dataBanner = [
         icon: RocketIcon,
         colorIcon: "#5a77a8",
         percent: "98",
-        title: "soluções ativas",
+        title: "Soluções ativas",
         colorDescription: "+5",
         textDescription: "este mês"
     },
@@ -24,7 +24,7 @@ export const dataBanner = [
         icon: BadgeCheck,
         colorIcon: "#e05853",
         percent: "99,89%",
-        title: "soluções ativas",
+        title: "de disponibilidade",
         colorDescription: "+2%",
         textDescription: "este mês"
     }
