@@ -36,27 +36,27 @@
         "noResults": "No se encontraron resultados."
     },
     "navMain": {
-        "home": "Inicio",
-        "solutions": "Soluciones",
-        "case": "Casos y Resultados",
-        "IA": "Hub de IA",
-        "tools": "Herramientas",
-        "squad": "Squads y Equipos",
-        "library": "Biblioteca",
-        "news": "Noticias",
-        "event": "Eventos",
-        "comunitys": "Comunidades"
+    "home": "Inicio",
+    "solutions": "Soluciones digitales",
+    "case": "Cases",
+    "IA": "Premios",
+    "tools": "Cumpleaños",
+    "squad": "Organigrama",
+    "library": "Material corporativo y comercial",
+    "news": "Comunicados",
+    "event": "Eventos",
+    "comunitys": "Chat corporativo"
     },
     "navSecondary": {
-        "label": "ACESSO RÁPIDO",
-        "insights": "Tahto Insights",
-        "performance": "Panel de Rendimiento",
+        "label": "Acceso rápido",
+        "insights": "SmartForecast",
+        "performance": "Gremio",
         "central": "Centro de Atención",
-        "knowledge": "Base de Conocimientos",
-        "demands": "Gestión de Demandas",
+        "knowledge": "LAB IA",
+        "demands": "Inventario de soluciones",
         "needhelp": "¿Necesitas ayuda?",
-        "asktoai": "Pregúntale a Tahto AI",
-        "talktoai": "Conversar ahora"
+        "asktoai": "Pregunta al Tahto AI",
+        "talktoai": "Chatear ahora"
     },
     "user": {
         "account": "Cuenta",

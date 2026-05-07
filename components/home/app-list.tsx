@@ -4,11 +4,10 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import * as React from "react";
 import { useState,useSyncExternalStore } from "react";
 import { toast } from "sonner";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Carousel,
     CarouselContent,
@@ -31,54 +30,24 @@ function useIsMounted() {
     );
 }
 
-export function AppList() {
+interface BannerListProps {
+    listBanner: {
+        id: number,
+        url: string,
+        image: string,
+        name: string
+    }[]
+};
 
-    const t = useTranslations("home");
+export function AppList( { listBanner }: BannerListProps ) {
+
+    const tEmphase = useTranslations("home.emphase");
     const { matricula, password } = useAuthStore();
     const jwtTokenGuilda = Cookies.get("jwtToken");
     const [loader, setLoader] = useState<number>(0);
     const mounted = useIsMounted();
 
-    const appsListData = [
-        {
-            id: 1,
-            url: `https://guilda.tahto.net.br/login`,
-            image: "/appsImage/guilda.png",
-            name: "Guilda"
-        },
-        {
-            id: 2,
-            url: `https://intranet.tahto.net.br/genteemacao/`,
-            image: "/appsImage/cac.png",
-            name: "CAC"
-        },
-        {
-            id: 3,
-            url: `https://gip.tahto.net.br/gip/index.xhtml`,
-            image: "/appsImage/GIP.png",
-            name: "GIP"
-        },
-        {
-            id: 4,
-            url: `https://gif.tahto.net.br/gif/`,
-            image: "/appsImage/GIF.png",
-            name: "GIF"
-        },
-        {
-            id: 5,
-            url: `https://luhmus.beedoo.io/login`,
-            image: "/appsImage/luhmus.png",
-            name: "Luhmus"
-        },
-        {
-            id: 6,
-            url: `https://vehtor.tahto.net.br/bpo`,
-            image: "/appsImage/vehtor.png",
-            name: "Vehtor"
-        },
-    ];
-
-    const handleOpenApp = async (app: typeof appsListData[number]) => {
+    const handleOpenApp = async (app: typeof listBanner[number]) => {
         setLoader(app.id);
         try {
             switch (app.id) {
@@ -123,47 +92,55 @@ export function AppList() {
     }
 
     return (
+        
         <div className="w-full">
-            <Carousel opts={{ align: "start", dragFree: true }} className="w-full">
-                <CarouselContent className="mx-2">
-                    {appsListData.map((app, index) => (
-                        <CarouselItem
-                            key={index}
-                            className="cursor-pointer pl-2 basis-[22%] md:basis-[26%]"
-                            // onClick={() => handleOpenApp(app)}
-                        >
-                            <Link href={app.url} target="_blank">
-                                <Card className="w-full h-full ring-0">
-                                
-                                    <CardContent className="flex items-center justify-center p-4 h-24 md:h-40">
-                                        <Image
-                                            src={app.image}
-                                            alt={app.name}
-                                            loading="eager"
-                                            unoptimized
-                                            width={0}
-                                            height={0}
-                                            className="object-contain w-14 h-14"
-                                        />
-                                    </CardContent>
-                                    <div className="relative flex justify-center items-center pb-3 px-1">
-                                        <span className="text-center text-xl font-medium leading-tight">
-                                            {app.name}
-                                        </span>
-                                        <div className="absolute right-1">
-                                            <Spinner width={4} className={loader === app.id ? "visible" : "invisible"} />
-                                        </div>
-                                    </div>
-                                </Card>
-                            </Link>
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-                <div className="mt-3 flex justify-center gap-2">
-                    <CarouselPrevious className="static translate-y-0" />
-                    <CarouselNext className="static translate-y-0" />
-                </div>
-            </Carousel>
+            <Card className="bg-transparent basis-full xl:flex-2">
+                <CardHeader className="flex items-center justify-between">
+                    <CardTitle>{tEmphase("title")}</CardTitle>
+                    <span className="text-primary">{tEmphase("viewAll")}</span>
+                </CardHeader>
+                <CardContent className="overflow-hidden p-0! pb-4">
+                    <Carousel opts={{ align: "start", dragFree: true }} className="w-full">
+                        <CarouselContent className="mx-2">
+                            {listBanner.map((app, index) => (
+                                <CarouselItem
+                                    key={index}
+                                    className="cursor-pointer pl-2 basis-[22%] md:basis-[26%] xl:basis-[20%]"
+                                    // onClick={() => handleOpenApp(app)}
+                                >
+                                    <Link href={app.url} target="_blank">
+                                        <Card className="w-full h-full ring-0">
+                                            <CardContent className="flex items-center justify-center p-4 h-24 md:h-40">
+                                                <Image
+                                                    src={app.image}
+                                                    alt={app.name}
+                                                    loading="eager"
+                                                    unoptimized
+                                                    width={0}
+                                                    height={0}
+                                                    className="object-contain w-24 h-24"
+                                                />
+                                            </CardContent>
+                                            <div className="relative flex justify-center items-center pb-3 px-1">
+                                                <span className="text-center text-xl font-medium leading-tight">
+                                                    {app.name}
+                                                </span>
+                                                <div className="absolute right-1">
+                                                    <Spinner width={4} className={loader === app.id ? "visible" : "invisible"} />
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </Link>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <div className="mt-3 flex justify-center gap-2">
+                            <CarouselPrevious className="static translate-y-0" />
+                            <CarouselNext className="static translate-y-0" />
+                        </div>
+                    </Carousel>
+                </CardContent>
+            </Card>
         </div>
     );
 }

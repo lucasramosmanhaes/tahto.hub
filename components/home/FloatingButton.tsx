@@ -178,8 +178,8 @@ export function FloatingButton() {
     const Tooltip = (
         <div style={{
             position: 'absolute',
-            bottom: 58,
-            left: 70,
+            bottom: 90,
+            left: 120,
             pointerEvents: 'none',
             filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))',
             transition: 'opacity 0.2s ease',
@@ -199,8 +199,8 @@ export function FloatingButton() {
                 onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}
                 style={{ position: 'fixed', left: pos.left, bottom: pos.bottom, zIndex: 9999, cursor: dragging ? 'grabbing' : 'pointer', userSelect: 'none' }}>
                 {Tooltip}
-                <div style={{ width: 100, height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img width={100} height={100} src="/gif/informativo2.gif" />
+                <div style={{ width: 160, height: 110, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img width={160} height={110} src="/gif/informativo2.gif" />
                 </div>
             </div>
 
