@@ -90,7 +90,7 @@ const Authentication = () => {
                 </DropdownMenu>
             </div>
 
-            <div className="flex h-screen flex-col justify-center space-y-4 sm:mx-10 md:mx-20 lg:mx-40 xl:mx-70 2xl:mx-130">
+            <div className="flex h-screen flex-col justify-center space-y-4 sm:mx-10 md:mx-20 lg:mx-40 xl:mx-70 2xl:mx-130 ">
                 <Card className="overflow-hidden p-0">
                     <CardContent className="grid p-0 md:grid-cols-2">
                         <div className="flex w-full flex-col gap-6 p-6 md:p-8">
@@ -104,7 +104,7 @@ const Authentication = () => {
                             </div>
                             <SignInForm formError={setHasError} />
                         </div>
-                        <div className="bg-muted relative hidden md:block">
+                        <div className="relative hidden md:block">
                             <Image
                                 src={gifUrl}
                                 loading="eager"
