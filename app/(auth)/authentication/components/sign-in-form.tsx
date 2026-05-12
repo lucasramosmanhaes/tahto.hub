@@ -108,67 +108,69 @@ const SignInForm = ({ formError }: SignInProps) => {
     };
 
     return (
-        <Card className="w-full">
-            <CardHeader>
-                <CardTitle>{t("signIn")}</CardTitle>
-                <CardDescription>{t("signInDescription")}</CardDescription>
-            </CardHeader>
+        <div className="w-full">
+            <Card>
+                <CardHeader>
+                    <CardTitle>{t("signIn")}</CardTitle>
+                    <CardDescription>{t("signInDescription")}</CardDescription>
+                </CardHeader>
 
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-8"
-                >
-                    <CardContent className="grid gap-6">
-                        <FormField
-                            control={form.control}
-                            name="matricula"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>{t("signInLabel")}</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder={t("registrationPlaceholder")}
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>{t("passwordLabel")}</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder={t("passwordPlaceholder")}
-                                            type="password"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                    </CardContent>
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-8"
+                    >
+                        <CardContent className="grid gap-6">
+                            <FormField
+                                control={form.control}
+                                name="matricula"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>{t("signInLabel")}</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder={t("registrationPlaceholder")}
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>{t("passwordLabel")}</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder={t("passwordPlaceholder")}
+                                                type="password"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </CardContent>
 
-                    <CardFooter className="flex flex-col gap-2">
-                        <Button
-                            type="submit"
-                            className="w-full cursor-pointer"
-                            disabled={form.formState.isSubmitting}
-                        >
-                            {form.formState.isSubmitting
-                                ? <Spinner width={4} />
-                                : t("signInButton")}
-                        </Button>
-                    </CardFooter>
-                </form>
-            </Form>
-        </Card>
+                        <CardFooter className="flex flex-col gap-2">
+                            <Button
+                                type="submit"
+                                className="w-full cursor-pointer"
+                                disabled={form.formState.isSubmitting}
+                            >
+                                {form.formState.isSubmitting
+                                    ? <Spinner width={4} />
+                                    : t("signInButton")}
+                            </Button>
+                        </CardFooter>
+                    </form>
+                </Form>
+            </Card>
+        </div>
     );
 };
 

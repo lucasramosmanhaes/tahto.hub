@@ -2,10 +2,10 @@
 
 import { IconBell, IconChevronDown, IconCommand, IconGridDots, IconLanguage, IconLogout, IconMessage, IconMoon, IconNotification, IconPlus, IconSearch, IconSun, IconUserCircle } from "@tabler/icons-react";
 import { BR, MX, US } from "country-flag-icons/react/3x2";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
     Command,
@@ -18,8 +18,8 @@ import {
 } from "@/components/ui/command";
 import { Separator } from "@/components/ui/separator";
 import { SidebarMenuButton, SidebarTrigger } from "@/components/ui/sidebar";
-
 import { useAuthStore } from "@/store/auth.store";
+
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
@@ -30,22 +30,17 @@ export function SiteHeader() {
     const tUser = useTranslations("user");
     const tAuth = useTranslations("auth");
     
-    const { theme, setTheme } = useTheme();
     const [openLanguageDialog, setOpenLanguageDialog] = useState(false);
     const router = useRouter();
     
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+    const { resolvedTheme, setTheme } = useTheme();
 
     const changeLocale = (locale: string) => {
         document.cookie = `locale=${locale}; path=/; max-age=31536000`;
         router.refresh();
     };
 
-    const { user, logoutUser } = useAuthStore();
+    const { logoutUser } = useAuthStore();
 
     const signOut = () => {
         document.cookie = "idTahtoJwtToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -98,11 +93,11 @@ export function SiteHeader() {
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton size="lg" className="w-auto px-1 sm:px-2">
                                     <Avatar className="h-8 w-8 rounded-lg">
-                                        <AvatarImage src="/appsImage/retrato.png" />
+                                        <AvatarImage src="/retrato.png" />
                                     </Avatar>
                                     <div className="hidden lg:flex flex-col text-xs leading-tight text-left">
-                                        {t("greeting", { name: "Camila" })}
-                                        <span className="text-slate-500">CX Strategy</span>
+                                        {t("greeting", { name: "LR" })}
+                                        <span className="text-slate-500">CEO</span>
                                     </div>
                                     <IconChevronDown className="size-4 hidden sm:block" />
                                 </SidebarMenuButton>
@@ -112,11 +107,11 @@ export function SiteHeader() {
                                 <DropdownMenuLabel className="p-0 font-normal">
                                     <div className="flex items-center gap-2 px-2 py-1.5">
                                         <Avatar className="h-8 w-8 rounded-lg">
-                                            <AvatarImage src="/appsImage/retrato.png" />
+                                            <AvatarImage src="/retrato.png" />
                                         </Avatar>
                                         <div className="flex flex-col text-xs">
-                                            Camila
-                                            <span className="text-slate-500">CX Strategy</span>
+                                            LR
+                                            <span className="text-slate-500">CEO</span>
                                         </div>
                                     </div>
                                 </DropdownMenuLabel>
@@ -127,9 +122,14 @@ export function SiteHeader() {
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-                                        {mounted ? (theme === "dark" ? <IconSun className="mr-2" /> : <IconMoon className="mr-2" />) : <IconMoon className="mr-2 opacity-0" />}
-                                        {theme === "dark" ? t("white") : t("dark")}
+                                    <DropdownMenuItem onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
+                                    {resolvedTheme === "dark" ? (
+                                        <IconSun className="mr-2" />
+                                    ) : (
+                                        <IconMoon className="mr-2" />
+                                    )}
+
+                                    {resolvedTheme === "dark" ? t("white") : t("dark")}
                                     </DropdownMenuItem>
                                     <DropdownMenuItem onClick={() => setOpenLanguageDialog(true)}>
                                         <IconLanguage className="mr-2" />{t("language")}

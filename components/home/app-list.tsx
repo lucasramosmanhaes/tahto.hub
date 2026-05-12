@@ -1,6 +1,5 @@
 "use client"
 
-import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -31,7 +30,7 @@ function useIsMounted() {
 }
 
 interface BannerListProps {
-    listBanner: {
+    listApps: {
         id: number,
         url: string,
         image: string,
@@ -39,15 +38,14 @@ interface BannerListProps {
     }[]
 };
 
-export function AppList( { listBanner }: BannerListProps ) {
+export function AppList( { listApps }: BannerListProps ) {
 
     const tEmphase = useTranslations("home.emphase");
     const { matricula, password } = useAuthStore();
-    const jwtTokenGuilda = Cookies.get("jwtToken");
     const [loader, setLoader] = useState<number>(0);
     const mounted = useIsMounted();
 
-    const handleOpenApp = async (app: typeof listBanner[number]) => {
+    const handleOpenApp = async (app: typeof listApps[number]) => {
         setLoader(app.id);
         try {
             switch (app.id) {
@@ -102,7 +100,7 @@ export function AppList( { listBanner }: BannerListProps ) {
                 <CardContent className="overflow-hidden p-0! pb-4">
                     <Carousel opts={{ align: "start", dragFree: true }} className="w-full">
                         <CarouselContent className="mx-2">
-                            {listBanner.map((app, index) => (
+                            {listApps.map((app, index) => (
                                 <CarouselItem
                                     key={index}
                                     className="cursor-pointer pl-2 basis-[22%] md:basis-[26%] xl:basis-[20%]"

@@ -112,13 +112,13 @@ function BotAvatar({ size = 40, gif }: { size?: number; gif: number }) {
 }
 
 export function FloatingButton() {
-    const [pos, setPos] = useState({ bottom: 44, left: 56 });
+    const [pos, setPos] = useState({ bottom: -10, left: 15 });
     const [dragging, setDragging] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
     const [autoShow, setAutoShow] = useState(true);
     const [open, setOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { role: 'bot', content: 'Olá! Sou o Tahtinho, assistente de Inteligência artificial da Tahto. Selecione uma dúvida ou escreva sua pergunta.' }
+        { role: 'bot', content: 'Olá! Sou o TaHtinho, assistente de Inteligência artificial da Tahto. Selecione uma dúvida ou escreva sua pergunta.' }
     ]);
     const [input, setInput] = useState('');
     const [typing, setTyping] = useState(false);
@@ -178,8 +178,8 @@ export function FloatingButton() {
     const Tooltip = (
         <div style={{
             position: 'absolute',
-            bottom: 90,
-            left: 120,
+            bottom: 160,
+            left: 190,
             pointerEvents: 'none',
             filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))',
             transition: 'opacity 0.2s ease',
@@ -199,8 +199,8 @@ export function FloatingButton() {
                 onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}
                 style={{ position: 'fixed', left: pos.left, bottom: pos.bottom, zIndex: 9999, cursor: dragging ? 'grabbing' : 'pointer', userSelect: 'none' }}>
                 {Tooltip}
-                <div style={{ width: 160, height: 110, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img width={160} height={110} src="/gif/informativo2.gif" />
+                <div style={{ width: 250, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img width={250} height={200} src="/gif/informativo2.gif" />
                 </div>
             </div>
 
@@ -213,7 +213,7 @@ export function FloatingButton() {
                             <BotAvatar size={56} gif={1}/>
                         </div>
                         <div>
-                            <DialogTitle className="text-sm font-medium leading-none">Tahtinho IA</DialogTitle>
+                            <DialogTitle className="text-sm font-medium leading-none">TaHtinho IA</DialogTitle>
                             <p className="text-xs text-muted-foreground mt-0.5">Online agora</p>
                         </div>
                     </DialogHeader>

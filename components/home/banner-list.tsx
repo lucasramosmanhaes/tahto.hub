@@ -19,12 +19,12 @@ export const BannerList = ({ listBanner }: BannerListProps) => {
 
     return (
 
-        <div className="w-full 2xl:h-full sm:p-8 2xl:p-16 flex flex-col lg:flex-row lg:justify-between gap-4 py-2 lg:gap-2 items-center rounded-xl bg-[url('/banner.png')] bg-cover bg-center bg-no-repeat">
-            <div className="flex flex-col p-6 lg:p-0 lg:w-96 space-y-6">
-                <p className="text-xl text-gray-400">BEM-VINDO(A) À</p>
+        <div className="w-full 2xl:h-full sm:p-8 2xl:p-12 flex flex-col lg:flex-row lg:justify-between gap-4 lg:gap-2 items-center rounded-xl bg-[url('/banner.png')] bg-cover bg-center bg-no-repeat">
+            <div className="flex flex-col lg:w-96 space-y-3">
+                <p className="text-lg text-gray-400">BEM-VINDO(A) À</p>
                 <div className="flex gap-1">
-                    <p className="text-5xl text-white">Tahto</p>
-                    <p className="text-5xl text-[#6d61e1]">Hub</p>
+                    <p className="text-4xl text-white">Tahto</p>
+                    <p className="text-4xl text-[#6d61e1]">Hub</p>
                 </div>
                 <p className="text-lg text-gray-400">O hub de soluções e tecnologias que transformam a experiência das pessoas e impulsionam resultados extraordinários.</p>
                 <Button className="w-44 py-5 hover:cursor-pointer">Explorar soluções <ChevronRight /> </Button>

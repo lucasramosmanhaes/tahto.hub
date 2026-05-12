@@ -22,7 +22,7 @@ const NewsList = ( { listNews } : NewsListProps) => {
                 </Button>
             </CardHeader>
 
-            <CardContent className="flex flex-col gap-5 2xl:mt-6">
+            <CardContent className="flex flex-col gap-5 2xl:mt-4">
                 {listNews.map((i) => (
                     <div key={i.id} className="flex gap-3">
                         <Image width={80} height={100} alt="imagem"

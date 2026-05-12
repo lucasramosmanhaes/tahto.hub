@@ -51,33 +51,33 @@ export const dataNews = [
 export const dataApps = [
     {
         id: 1,
+        url: `https://luhmus.beedoo.io/login`,
+        image: "/appsImage/luhmus.png",
+        name: "Luhmus"
+    },
+    {
+        id: 2,
         url: `https://guilda.tahto.net.br/login`,
         image: "/appsImage/guilda.png",
         name: "Guilda"
     },
     {
-        id: 2,
+        id: 3,
         url: `https://intranet.tahto.net.br/genteemacao/`,
         image: "/appsImage/cac.png",
         name: "CAC"
     },
     {
-        id: 3,
+        id: 4,
         url: `https://gip.tahto.net.br/gip/index.xhtml`,
         image: "/appsImage/GIP.png",
         name: "GIP"
     },
     {
-        id: 4,
+        id: 5,
         url: `https://gif.tahto.net.br/gif/`,
         image: "/appsImage/GIF.png",
         name: "GIF"
-    },
-    {
-        id: 5,
-        url: `https://luhmus.beedoo.io/login`,
-        image: "/appsImage/luhmus.png",
-        name: "Luhmus"
     },
     {
         id: 6,
