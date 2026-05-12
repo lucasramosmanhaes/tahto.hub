@@ -39,7 +39,7 @@ const Authentication = () => {
     };
 
     return (
-        <div className="flex h-screen flex-col">
+        <div className="flex h-screen flex-col bg-[url('/fundo.png')] bg-cover bg-top bg-no-repeat">
             <div className="flex w-full justify-end gap-2 p-2">
                 <Button
                     onClick={() =>
@@ -117,7 +117,7 @@ const Authentication = () => {
                         </div>
                     </CardContent>
                 </Card>
-                <FieldDescription className="text-center">
+                <FieldDescription className="text-center text-white">
                     {t("terms")} <a href="#">{t("termsLink")}</a>
                     <span>{` ${t("and")} `}</span>
                     <a href="#">{t("privacyLink")}</a>.
